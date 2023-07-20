@@ -43,13 +43,13 @@ public class SpringConfig  {
         http
                 .csrf().disable().cors().disable()
                 .authorizeRequests()
-                    .antMatchers("/home","/","/JoinForm").permitAll()
+                    .antMatchers("/home","/","/JoinForm","/join").permitAll()
                     .anyRequest().authenticated()
                     .and()
 
                 .formLogin()
                     .loginPage("/LoginForm").permitAll()
-                    .loginProcessingUrl("/LoginForm")
+                    .loginProcessingUrl("/LoginForm") //LoginForm을 만나면 시큐리티가 낚아챔
                     .defaultSuccessUrl("/kakao")// 패스워드 파라미터명 설정
                       .and()
 

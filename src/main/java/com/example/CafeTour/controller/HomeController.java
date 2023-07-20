@@ -18,11 +18,13 @@ public class HomeController {
     @Autowired
     private UserRepository userRepository;
 
-    private final UserService userService;
+    @Autowired
+    UserService userService;
 
     /* @Autowired
      private BCryptPasswordEncoder bCryptPasswordEncoder;
- */
+    */
+
     @RequestMapping("/kakao")
     public String home(){
         return "kakao";
@@ -48,18 +50,12 @@ public class HomeController {
         return "login";
     }
 
-    @RequestMapping("/join")
-    public String join(@ModelAttribute UserDto userDto){
-       /* String rawPassword=user.getPw();
+    @PostMapping("/join")
+    public String join(User user){
+        /*String rawPassword=user.getPw();
         String encPassword=bCryptPasswordEncoder.encode(rawPassword);
-        user.setPw(encPassword);
-        userRepository.save(user);*/
-        User user=new User();
-        user.setPw(userDto.getPw());
-        user.setEmail(userDto.getEmail());
-        user.setNickName(userDto.getNickName());
+        user.setPw(encPassword);*/
         userService.save(user);
-        return "home";
+        return "redirect:/LoginForm";
     }
-
 }

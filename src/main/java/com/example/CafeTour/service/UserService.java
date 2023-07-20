@@ -15,12 +15,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional
 public class UserService {
-    private final UserRepository userRepository;
-
-   /* public void save(UserDto userDto) {
-        User user = userRepository.save(User.toUser(userDto));
-    }
-    */
+    @Autowired
+    UserRepository userRepository;
 
     public void save(User user){
         userRepository.save(user);
