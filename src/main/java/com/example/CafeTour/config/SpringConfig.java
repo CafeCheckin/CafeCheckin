@@ -33,17 +33,17 @@ public class SpringConfig  {
 
         return http.build();
     }*/
-   /* @Bean
+    @Bean
     public BCryptPasswordEncoder encoderPwd(){
         return new BCryptPasswordEncoder();
-    }*/
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable().cors().disable()
                 .authorizeRequests()
-                    .antMatchers("/home","/","/JoinForm","/join").permitAll()
+                    .antMatchers("/home","/","/JoinForm","/join","/homepage").permitAll()
                     .anyRequest().authenticated()
                     .and()
 
