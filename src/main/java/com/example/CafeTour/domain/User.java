@@ -24,6 +24,9 @@ public class User{
     @Column(name = "nickname")
     private String nickName;
 
+    @Column(name="user_role")
+    private String userRole;
+
     @Column(name = "user_create_dt")
     @CreationTimestamp
     private Timestamp userCreateDt;

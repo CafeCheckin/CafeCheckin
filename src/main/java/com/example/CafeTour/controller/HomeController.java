@@ -15,17 +15,16 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
-
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
     UserService userService;
-
-     @Autowired
+/*
+    @Autowired
      private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
+*/
     @RequestMapping("/kakao")
     public String home(){
         return "kakao";
@@ -50,7 +49,7 @@ public class HomeController {
     public String login(){
         return "login";
     }
-
+/*
     @PostMapping("/join")
     public String join(User user){
         String rawPassword=user.getPw();
@@ -59,7 +58,7 @@ public class HomeController {
         userService.save(user);
         return "redirect:/LoginForm";
     }
-
+*/
     @GetMapping("homepage")
     public String homepage(){
         return "homepage";
