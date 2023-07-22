@@ -46,14 +46,14 @@ public User create(String username, String email, String password) {
 
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> _user = this.userRepository.findByEmail(email);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<User> _user = this.userRepository.findByEmail(username);
         if (_user.isEmpty()) {
             throw new UsernameNotFoundException("사용자를 찾을수 없습니다.");
         }
         User user = _user.get();
         List<GrantedAuthority> authorities = new ArrayList<>();
-        if ("admin".equals(email)) {
+        if ("admin".equals(username)) {
             authorities.add(new SimpleGrantedAuthority(UserRole.ADMIN.getValue()));
         } else {
             authorities.add(new SimpleGrantedAuthority(UserRole.USER.getValue()));
