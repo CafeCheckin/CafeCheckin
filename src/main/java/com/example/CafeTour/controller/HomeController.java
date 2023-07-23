@@ -1,16 +1,10 @@
 package com.example.CafeTour.controller;
-
-import com.example.CafeTour.domain.User;
-import com.example.CafeTour.dto.UserDto;
 import com.example.CafeTour.repository.UserRepository;
 import com.example.CafeTour.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -20,11 +14,7 @@ public class HomeController {
 
     @Autowired
     UserService userService;
-/*
-    @Autowired
-     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-*/
     @RequestMapping("/kakao")
     public String home(){
         return "kakao";
@@ -64,4 +54,18 @@ public class HomeController {
         return "homepage";
     }
 
+    @GetMapping("/pra")
+    public String pra(){
+        return "pra";
+    }
+
+    @RequestMapping("/lll")
+    public String pra1(){
+        return "lll";
+    }
+
+    @RequestMapping("/LoginHome")
+    public String LoginHome(){
+        return "LoginHome";
+    }
 }

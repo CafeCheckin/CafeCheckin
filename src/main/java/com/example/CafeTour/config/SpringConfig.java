@@ -38,18 +38,20 @@ public class SpringConfig  {
         http
                 .csrf().disable().cors().disable()
                 .authorizeRequests()
-                    .antMatchers("/home","/","/JoinForm","/join","/homepage","/signup","/signup_form").permitAll()
+                    .antMatchers("/home","/","/JoinForm","/join","/homepage","/signup","/signup_form","/lll").permitAll()
                     .anyRequest().authenticated()
                     .and()
 
                 .formLogin()
-                    .loginPage("/LoginForm").permitAll()
-                    .loginProcessingUrl("/LoginForm") //LoginForm을 만나면 시큐리티가 낚아챔
-                    .defaultSuccessUrl("/kakao")// 패스워드 파라미터명 설정
+                    .loginPage("/lll").permitAll()
+                    .loginProcessingUrl("/lll") //LoginForm을 만나면 시큐리티가 낚아챔
+                    .defaultSuccessUrl("/LoginHome")// 패스워드 파라미터명 설정
                     .and()
 
                 .logout()
-                    .permitAll();
+                        .permitAll()
+                     .logoutSuccessUrl("/home")
+                    .invalidateHttpSession(true);
         return http.build();
     }
 
