@@ -31,7 +31,7 @@ public class PrincipalDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getEmail();
+        return user.getEmail(); //저자는 이메일로 로그인을 하기 때문에 email을 받아온다.
     }
 
     @Override
