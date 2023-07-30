@@ -37,10 +37,14 @@ public class SpringConfig  {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable().cors().disable()
-                .authorizeRequests()
+                /*.authorizeRequests()
                     .antMatchers("/home","/","/JoinForm","/join","/homepage","/signup","/signup_form","/lll").permitAll()
                     .anyRequest().authenticated()
-                    .and()
+                    .and()*/
+                .authorizeRequests()
+                .antMatchers("/lll","/LoginHome").authenticated()
+                .anyRequest().permitAll()
+                .and()
 
                 .formLogin()
                     .loginPage("/lll").permitAll()

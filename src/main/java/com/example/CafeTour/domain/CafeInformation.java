@@ -17,6 +17,9 @@ public class CafeInformation {
         @Column(name = "open_at")
         private String openAt;
 
+        @Column(name = "close_at")
+        private String closeAt;
+
         @Column(name = "tel_num")
         private String telNum;
 
