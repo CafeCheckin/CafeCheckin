@@ -10,7 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.PastOrPresent;
 import java.util.List;
 
@@ -26,8 +29,10 @@ public class CafeController {
         return "cafe";
     }
 
-    @PostMapping(value = "SeoulCafe/{location}")
-    public String gangNam(@PathVariable("location")String location) throws Exception{
-        return "/SeoulCafe/GangNam";
+    @GetMapping("/SeoulCafe")
+    public String gangNam(HttpServletRequest httpServletRequest){
+        String name=httpServletRequest.getParameter("seoul");
+        System.out.println("name "+name);
+        return "/SeoulCafe/"+name;
     }
 }

@@ -88,23 +88,34 @@
 <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
     <span class="fs-4">카페 체크인</span>
     <div class="Seoul">
-<form action="SeoulCafe/GangNam" method="post">
+
+<form action="/SeoulCafe" method="get">
     <div class="seoulLocation">
-    <select class="form-select" aria-label="Default select example">
-        <option selected>지역구</option>
-        <option value="강남구">강남구</option>
-        <option value="강북구">강북구</option>
-        <option value="강서구">강서구</option>
-        <option value="관악구">관악구</option>
-        <option value="구로구">구로구</option>
-        <option value="금천구">금천구</option>
-        <option value="노원구">노원구</option>
-        <option value="도봉구">도봉구</option>
-        <option value="동대문구">동대문구</option>
-        <option value="동작구">동작구</option>
-        <option value="마포구">마포구</option>
-        <option value="서대문구">서대문구</option>
-        <option value="서초구">서초구</option>
+    <select class="form-select" name="seoul" aria-label="Default select example">
+        <option value="">지역구</option>
+        <option value="GangNam">강남구</option>
+        <option value="GangBuk">강북구</option>
+        <option value="GangSeo">강서구</option>
+        <option value="GwanAk">관악구</option>
+        <option value="GuRo">구로구</option>
+        <option value="GeumCheon">금천구</option>
+        <option value="NoWon">노원구</option>
+        <option value="DoBong">도봉구</option>
+        <option value="DongDaeMun">동대문구</option>
+        <option value="DongJak">동작구</option>
+        <option value="MaPo">마포구</option>
+        <option value="SeoDaeMun">서대문구</option>
+        <option value="SeoCho">서초구</option>
+        <option value="SeongDong">성동구</option>
+        <option value="SeongBuk">성북구</option>
+        <option value="SongPa">송파구</option>
+        <option value="YangCheon">양천구</option>
+        <option value="YeongDeungPo">영등포구</option>
+        <option value="YongSan">용산구</option>
+        <option value="EunPyeong">은평구</option>
+        <option value="JongNo">종로구</option>
+        <option value="JungGu">중구</option>
+        <option value="JungNang">중랑구</option>
     </select>
         </div>
       <div class="mood">
@@ -114,11 +125,12 @@
         <option value="애견카페">애견카페</option>
     </select>
       </div>
-    <input type="submit" class="btn btn-outline-secondary" style="margin-left: 40px;" value="검색하기">
+    <input type="submit" class="btn btn-outline-secondary"  style="margin-left: 40px;"  value="검색하기">
 </form>
+
     </div>
     <a class="btn btn-primary" style="margin-left: 400px;" href="/logout" role="button">로그아웃</a>
-</div>
+    </div>
 
 <div class="map-frame">
     <div id="map" style="height:400px;"></div>
