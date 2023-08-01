@@ -30,20 +30,15 @@ public class UserService implements UserDetailsService{
     UserRepository userRepository;
 
     private final PasswordEncoder encoder;
-/*
-    public void save(User user){
-        userRepository.save(user);
-    }
-*/
-public User create(String username, String email, String password) {
-    User user = new User();
-    user.setNickName(username);
-    user.setEmail(email);
-    user.setPw(encoder.encode(password));
-    this.userRepository.save(user);
-    return user;
-}
 
+    public User create(String username, String email, String password) {
+        User user = new User();
+        user.setNickName(username);
+        user.setEmail(email);
+        user.setPw(encoder.encode(password));
+        this.userRepository.save(user);
+        return user;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -59,5 +54,14 @@ public User create(String username, String email, String password) {
             authorities.add(new SimpleGrantedAuthority(UserRole.USER.getValue()));
         }
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPw(), authorities);
+    }
+
+    public User findByEmail(String email){
+        Optional<User> userOptional=userRepository.findByEmail(email);
+        if(userOptional.isPresent()){
+            User user=userOptional.get();
+            return user;
+        }
+        return null;
     }
 }

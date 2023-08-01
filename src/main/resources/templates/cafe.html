@@ -19,12 +19,12 @@
         }
         .seoulLocation{
             float: left;
-            margin-left: 60px;
+            margin-left: 300px;
         }
 
         .mood{
             float: left;
-            margin-left: 60px;
+            margin-left: 100px;
         }
 
         .b-example-vr {
@@ -125,11 +125,13 @@
         <option value="애견카페">애견카페</option>
     </select>
       </div>
-    <input type="submit" class="btn btn-outline-secondary"  style="margin-left: 40px;"  value="검색하기">
+    <input type="submit" class="btn btn-outline-secondary"  style="margin-left: 60px;"  value="검색하기">
 </form>
-
+        <div>
+         <p><span th:text = "${userinfo1}"></span>님 환영합니다!</p>
+        </div>
     </div>
-    <a class="btn btn-primary" style="margin-left: 400px;" href="/logout" role="button">로그아웃</a>
+    <a class="btn btn-primary" style="margin-left: 300px;" href="/logout" role="button">로그아웃</a>
     </div>
 
 <div class="map-frame">

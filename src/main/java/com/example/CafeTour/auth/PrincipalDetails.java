@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.lang.annotation.Inherited;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -27,6 +28,10 @@ public class PrincipalDetails implements UserDetails {
     @Override
     public String getPassword() {
         return user.getPw();
+    }
+
+    public String getNickName(){
+        return user.getNickName();
     }
 
     @Override

@@ -1,10 +1,14 @@
 package com.example.CafeTour.controller;
+import com.example.CafeTour.domain.User;
 import com.example.CafeTour.repository.UserRepository;
 import com.example.CafeTour.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
@@ -39,16 +43,7 @@ public class HomeController {
     public String login(){
         return "login";
     }
-/*
-    @PostMapping("/join")
-    public String join(User user){
-        String rawPassword=user.getPw();
-        String encPassword=bCryptPasswordEncoder.encode(rawPassword);
-        user.setPw(encPassword);
-        userService.save(user);
-        return "redirect:/LoginForm";
-    }
-*/
+
     @GetMapping("homepage")
     public String homepage(){
         return "homepage";
@@ -64,8 +59,23 @@ public class HomeController {
         return "lll";
     }
 
-    @RequestMapping("/LoginHome")
+    @RequestMapping("/cafe")
     public String LoginHome(){
-        return "LoginHome";
+        return "cafe";
     }
+
+    @GetMapping("/userinfo")
+    public String userInfo(Principal principal,Model model){
+        System.out.println(principal.getName());
+        model.addAttribute("userinfo1",principal.getName());
+        return "cafe";
+    }
+
+    @GetMapping("/userinfo2")
+    public String findByEmail(Model model,Principal principal){
+        User userDto=userService.findByEmail(principal.getName());
+        model.addAttribute("userinfo2",userDto);
+        return "UserInfo";
+    }
+
 }

@@ -5,13 +5,13 @@
     <title>Title</title>
 </head>
 <body>
-<h1>스프링 시큐리티 회원가입</h1>
-<hr/>
-<form action="/join"METHOD="POST">
-    <input type="text"name="nickname"placeholder="Username"/><br/>
-    <input type="password"name="Pw"placeholder="Password"/><br/>
-    <input type="email"name="email"placeholder="Email"/><br/>
-    <input type="submit"value="회원가입">
-</form>
+<table>
+    <tr>
+        <td th:text ="${userinfo2.Id}"></td>
+        <td th:text ="${userinfo2.Pw}"></td>
+        <td th:text ="${userinfo2.email}"></td>
+        <td th:text ="${userinfo2.nickName}"></td>
+    </tr>
+</table>
 </body>
 </html>
