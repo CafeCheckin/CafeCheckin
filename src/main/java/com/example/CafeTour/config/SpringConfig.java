@@ -29,14 +29,14 @@ public class SpringConfig  {
         http
                 .csrf().disable().cors().disable()
                 .authorizeRequests()
-                .antMatchers("/lll","/LoginHome").authenticated()
+                .antMatchers("/lll").authenticated()
                 .anyRequest().permitAll()
                 .and()
 
                 .formLogin()
                     .loginPage("/lll").permitAll()
                     .loginProcessingUrl("/lll") //LoginForm을 만나면 시큐리티가 낚아챔
-                    .defaultSuccessUrl("/cafe")// 패스워드 파라미터명 설정
+                    .defaultSuccessUrl("/cafe",true)// 패스워드 파라미터명 설정
                     .and()
 
                 .logout()

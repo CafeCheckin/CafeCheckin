@@ -22,13 +22,13 @@ import java.util.List;
 public class CafeController {
     private final CafeService cafeService;
 
-    @GetMapping("/cafe")
+    /*@GetMapping("/cafe")
     public String cafeInformation(Model model){
         List<CafeInformation> cafeInformations=cafeService.findCafe();
         model.addAttribute("cafe",cafeInformations);
         return "cafe";
     }
-
+*/
     @GetMapping("/SeoulCafe")
     public String gangNam(HttpServletRequest httpServletRequest){
         String name=httpServletRequest.getParameter("seoul");

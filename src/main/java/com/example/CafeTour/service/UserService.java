@@ -64,4 +64,8 @@ public class UserService implements UserDetailsService{
         }
         return null;
     }
+
+    public void updateUser(UserDto userDto){
+        userRepository.save(User.toUpdateUser(userDto));
+    }
 }

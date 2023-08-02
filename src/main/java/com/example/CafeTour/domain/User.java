@@ -3,7 +3,11 @@ package com.example.CafeTour.domain;
 import com.example.CafeTour.dto.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -30,4 +34,13 @@ public class User{
     @Column(name = "user_create_dt")
     @CreationTimestamp
     private Timestamp userCreateDt;
+
+    public static User toUpdateUser(UserDto userDto){
+        User user=new User();
+        user.setId(userDto.getId());
+        user.setEmail(userDto.getEmail());
+        user.setNickName(userDto.getNickName());
+        user.setPw(userDto.getPw());
+        return user;
+    }
 }
