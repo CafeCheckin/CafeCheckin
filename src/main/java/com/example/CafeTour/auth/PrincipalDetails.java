@@ -58,4 +58,8 @@ public class PrincipalDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public void setUser(User user){
+        this.user=user;
+    }
 }

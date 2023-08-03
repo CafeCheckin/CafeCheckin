@@ -1,16 +1,16 @@
 package com.example.CafeTour.controller;
 
+import com.example.CafeTour.domain.User;
 import com.example.CafeTour.domain.UserCreateForm;
 import com.example.CafeTour.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.security.Principal;
 
 @RequiredArgsConstructor
 @Controller
@@ -49,5 +49,17 @@ public class UserController {
             }
             return "home";
         }
+
+    @GetMapping("/userInfoUpdate")
+    public String userInfo(Model model, Principal principal){
+        User userDto=userService.findByEmail(principal.getName());
+        model.addAttribute("userinfo2",userDto);
+        return "UserUpdateForm";
     }
+
+    @PostMapping("/userInfoUpdate")
+    public void userInfoUpdate(@RequestBody User user) {
+        userService.updateUser(user);
+    }
+}
 

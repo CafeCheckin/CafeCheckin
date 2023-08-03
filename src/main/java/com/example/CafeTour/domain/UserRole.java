@@ -1,9 +1,6 @@
 package com.example.CafeTour.domain;
 
-import com.example.CafeTour.repository.UserRepository;
-import lombok.Data;
 import lombok.Getter;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Getter
 public enum UserRole {

@@ -43,16 +43,16 @@ public class HomeController {
         return "cafe";
     }
 
-    @GetMapping("/userInfoUpdate")
+   /* @GetMapping("/userInfoUpdate")
     public String userInfo(Model model,Principal principal){
         User userDto=userService.findByEmail(principal.getName());
         model.addAttribute("userinfo2",userDto);
         return "UserUpdateForm";
-    }
+    }*/
 
-    @PostMapping("/userInfoUpdate")
+   /* @PostMapping("/userInfoUpdate")
     public String userInfoUpdate(@ModelAttribute UserDto userDto){
         userService.updateUser(userDto);
         return "cafe";
-    }
+    }*/
 }

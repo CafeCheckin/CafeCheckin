@@ -3,12 +3,11 @@ package com.example.CafeTour.service;
 import com.example.CafeTour.auth.PrincipalDetails;
 import com.example.CafeTour.domain.User;
 import com.example.CafeTour.domain.UserRole;
-import com.example.CafeTour.dto.UserDto;
 import com.example.CafeTour.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.UserDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,8 +27,9 @@ import java.util.Optional;
 public class UserService implements UserDetailsService{
     @Autowired
     UserRepository userRepository;
-
+   //private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final PasswordEncoder encoder;
+
 
     public User create(String username, String email, String password) {
         User user = new User();
@@ -65,7 +65,15 @@ public class UserService implements UserDetailsService{
         return null;
     }
 
-    public void updateUser(UserDto userDto){
-        userRepository.save(User.toUpdateUser(userDto));
+    @Transactional
+    public void updateUser(User user){
+        User persistance=userRepository.findByEmail(user.getEmail()).orElseThrow(()
+                ->{return new IllegalArgumentException("회원찾기 실패");
+        });
+        String rawPassword= user.getPw();
+        System.out.println(rawPassword);
+        String encPassword=encoder.encode(rawPassword);
+        persistance.setPw(encPassword);
+        persistance.setNickName(user.getNickName());
     }
 }
