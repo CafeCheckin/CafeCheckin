@@ -66,14 +66,14 @@ public class UserService implements UserDetailsService{
     }
 
     @Transactional
-    public void updateUser(User user){
-        User persistance=userRepository.findByEmail(user.getEmail()).orElseThrow(()
+    public void updateUser(String username,String password,String email){
+        User persistance=userRepository.findByEmail(email).orElseThrow(()
                 ->{return new IllegalArgumentException("회원찾기 실패");
         });
-        String rawPassword= user.getPw();
+        String rawPassword=password;
         System.out.println(rawPassword);
         String encPassword=encoder.encode(rawPassword);
         persistance.setPw(encPassword);
-        persistance.setNickName(user.getNickName());
+        persistance.setNickName(username);
     }
 }

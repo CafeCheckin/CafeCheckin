@@ -58,8 +58,9 @@ public class UserController {
     }
 
     @PostMapping("/userInfoUpdate")
-    public void userInfoUpdate(@RequestBody User user) {
-        userService.updateUser(user);
+    public String userInfoUpdate(@RequestParam String username, String password1,String email) {
+        userService.updateUser(username,password1,email);
+        return "cafe";
     }
 }
 
