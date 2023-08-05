@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -28,5 +29,8 @@ public class User{
     @Column(name = "user_create_dt")
     @CreationTimestamp
     private Timestamp userCreateDt;
+
+    @OneToMany(mappedBy = "user")
+    private List<Board> boardList;
 
 }

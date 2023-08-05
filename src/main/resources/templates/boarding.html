@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시물 작성폼</title>
+</head>
+
+<style>
+    .layout{
+        width: 500px;
+        margin: 0 auto;
+        margin-top: 40px;
+    }
+
+    .layout textarea{
+        width: 100%;
+        margin-top: 10px;
+        min-height: 300px;
+    }
+
+    .layout input{
+        width: 100%;
+        box-sizing: border-box;
+    }
+</style>
+
+<body>
+<div class="layout">
+    <form action="/boardlist" method="post">
+        <label for="title">제목</label>
+        <input name="title" id="title" type="text">
+        <br>
+        <br>
+
+        <label for="boardOpinion">글 내용</label>
+        <textarea name="boardOpinion" id="boardOpinion"></textarea>
+        <button type="submit">작성</button>
+    </form>
+</div>
+</body>
+</html>
