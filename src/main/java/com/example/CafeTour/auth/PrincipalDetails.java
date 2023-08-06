@@ -1,6 +1,7 @@
 package com.example.CafeTour.auth;
 
 import com.example.CafeTour.domain.User;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,9 +11,8 @@ import java.lang.annotation.Inherited;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
+@Getter
 public class PrincipalDetails implements UserDetails {
-
     private User user;
     public PrincipalDetails(User user) {
         this.user=user;

@@ -1,5 +1,6 @@
 package com.example.CafeTour.domain;
 
+import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,7 @@ public class Board {
     private Long id;
 
     @JoinColumn(name ="user_id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
     @Column(name = "board_opinion")
