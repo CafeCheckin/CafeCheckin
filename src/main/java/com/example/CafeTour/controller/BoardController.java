@@ -13,6 +13,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -42,10 +43,14 @@ public class BoardController {
     @GetMapping("/board")
     public String list(Model model, Principal details) {
         List<Board> boardList = boardRepository.findAll();
-        while(!boardList.isEmpty()){
-            boardList.
-        }
         model.addAttribute("li", boardService.boardingList());
         return "BoardList";
+    }
+
+    @GetMapping("/view")
+    public String findById(Long id,Model model){ //게시글의 번호(Id)값을 인자로 받음
+        model.addAttribute("boarddetail",boardService.details(id));
+        System.out.println(boardRepository.findByNickname(id));
+        return "BoardDetails";
     }
 }

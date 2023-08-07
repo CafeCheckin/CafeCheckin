@@ -14,14 +14,19 @@
     <th scope="col">작성일</th>
     <th scope="col">수정일</th>
 </tr>
+<br><br>
 <tbody>
 <tr th:each="board : ${li}">
     <td th:text="${board.id}"></td>
-    <td th:text="${board.title}"></td>
+    <td>
+        <a th:text="${board.title}" th:href="@{/view(id=${board.id})}"></a>
+    </td>
     <td th:text="${board.boardOpinion}"></td>
     <td th:text="${board.createDate}"></td>
     <td th:text="${board.modifyDate}"></td>
+    <a href="@{/board/${board.id}}" class="btn-btn-primary">상세보기</a>
    <!--!> <td th:text="${board.user.nickName}"></td><-->
+    <br><br>
 </tr>
 </tbody>
 </body>

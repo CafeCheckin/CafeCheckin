@@ -19,18 +19,20 @@ public class BoardService {
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
 
-    public Page<Board> getBoardList(PageRequest pageRequest){
-        return boardRepository.findAll(pageRequest);
-    }
-
     public void write(Board board, User user){
         board.setUser(user);
         boardRepository.save(board);
     }
 
     @Transactional
-    public List<Board> boardingList(){
+    public List<Board>  boardingList(){
         return boardRepository.findAll();
     }
 
+    public Board details(Long id){
+        return boardRepository.findById(id)
+                .orElseThrow(()->{
+                    return new IllegalArgumentException("글 상세보기 실패");
+                });
+    }
 }
