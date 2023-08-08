@@ -24,13 +24,6 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/userinfo")
-    public String findByEmail(Model model,Principal principal){
-        User userDto=userService.findByEmail(principal.getName());
-        model.addAttribute("userinfo2",userDto);
-        return "UserInfo";
-    }
-
     @RequestMapping("/lll")
     public String pra1(){
         return "lll";

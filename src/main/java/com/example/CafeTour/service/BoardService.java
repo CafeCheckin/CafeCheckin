@@ -17,7 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardService {
     private final BoardRepository boardRepository;
-    private final UserRepository userRepository;
 
     public void write(Board board, User user){
         board.setUser(user);

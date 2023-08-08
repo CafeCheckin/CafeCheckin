@@ -25,32 +25,32 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
-    private final Board board;
     private final BoardRepository boardRepository;
     private final UserService userService;
 
-    @GetMapping("/boarding")
+    @GetMapping("/boarding") //글 작성
     public String boardMain() {
         return "boarding";
     }
 
-    @PostMapping("/boardlist")
-    public void boardList(Board board, Principal principal) {
+    @PostMapping("/writeboard") //작성한 게시글 저장
+    public String boardList(Board board, Principal principal) {
         User userDto = userService.findByEmail(principal.getName());
         boardService.write(board, userDto);
+        return "redirect:/board";
     }
 
-    @GetMapping("/board")
+    @GetMapping("/board")  //게시글 목록
     public String list(Model model, Principal details) {
         List<Board> boardList = boardRepository.findAll();
         model.addAttribute("li", boardService.boardingList());
         return "BoardList";
     }
 
-    @GetMapping("/view")
+    @GetMapping("/view") //게시글 상세조회
     public String findById(Long id,Model model){ //게시글의 번호(Id)값을 인자로 받음
         model.addAttribute("boarddetail",boardService.details(id));
-        System.out.println(boardRepository.findByNickname(id));
+        //System.out.println(boardRepository.findByNickname(id));
         return "BoardDetails";
     }
 }

@@ -21,7 +21,7 @@ public class Board {
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
-    @Column(name = "board_opinion")
+    @Lob
     private String boardOpinion;
 
     @Column(name = "clicks")
@@ -37,4 +37,5 @@ public class Board {
     @Column(name = "modify_date")
     @CreationTimestamp
     private Timestamp modifyDate;
+
 }

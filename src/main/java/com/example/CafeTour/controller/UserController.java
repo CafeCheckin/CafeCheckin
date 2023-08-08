@@ -62,5 +62,12 @@ public class UserController {
         userService.updateUser(username,password1,email);
         return "cafe";
     }
+
+    @GetMapping("/userinfo")
+    public String findByEmail(Model model,Principal principal){
+        User userDto=userService.findByEmail(principal.getName());
+        model.addAttribute("userinfo2",userDto);
+        return "UserInfo";
+    }
 }
 

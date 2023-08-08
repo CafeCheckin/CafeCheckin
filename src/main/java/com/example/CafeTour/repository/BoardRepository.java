@@ -14,8 +14,4 @@ import java.util.Optional;
 public interface BoardRepository extends JpaRepository<Board,Long> {
     @Override
     Optional<Board> findById(Long aLong);
-
-    @Query(value = "select u.nickName from User u,Board b where u.id=:id")
-    Optional<User> findByNickname(@Param("id")Long id);
-
 }
