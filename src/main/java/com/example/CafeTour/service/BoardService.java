@@ -34,4 +34,9 @@ public class BoardService {
                     return new IllegalArgumentException("글 상세보기 실패");
                 });
     }
+
+    @Transactional
+    public void deleteById(Long id) {
+        boardRepository.deleteById(id);
+    }
 }
