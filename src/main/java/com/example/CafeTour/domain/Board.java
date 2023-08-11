@@ -1,17 +1,16 @@
 package com.example.CafeTour.domain;
 
-import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "boarding")
 @Data
-@Component
 public class Board {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
@@ -35,7 +34,6 @@ public class Board {
     private Timestamp createDate;
 
     @Column(name = "modify_date")
-    @CreationTimestamp
+    @UpdateTimestamp
     private Timestamp modifyDate;
-
 }

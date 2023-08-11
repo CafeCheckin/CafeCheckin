@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.security.Principal;
 import java.util.List;
 
@@ -54,5 +53,17 @@ public class BoardController {
     public String deleteBoarding(Long id){
         boardService.deleteById(id);
         return "redirect:/board";
+    }
+
+    @PostMapping("/updateboard")
+    public String boardUpdate(Long id,Board board) {
+        boardService.updateBoard(board,id);
+        return "redirect:/board";
+    }
+
+    @GetMapping("/update")
+    public String boardUpdateForm(Long id,Model model) {
+        model.addAttribute("boarddetail",boardService.details(id));
+        return "BoardUpdate";
     }
 }

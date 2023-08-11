@@ -18,16 +18,18 @@ import java.util.List;
 public class BoardService {
     private final BoardRepository boardRepository;
 
+    @Transactional
     public void write(Board board, User user){
         board.setUser(user);
         boardRepository.save(board);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Board>  boardingList(){
         return boardRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public Board details(Long id){
         return boardRepository.findById(id)
                 .orElseThrow(()->{
@@ -35,8 +37,21 @@ public class BoardService {
                 });
     }
 
-    @Transactional
     public void deleteById(Long id) {
         boardRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void updateBoard(Board board,Long id) {
+        Board persistance=boardRepository.findById(id).orElseThrow(()
+                ->{return new IllegalArgumentException("글 찾기 실패");
+        });
+        System.out.println(board.getTitle());
+        System.out.println(board.getBoardOpinion());
+        System.out.println(persistance.getId());
+        persistance.setTitle(board.getTitle());
+        persistance.setBoardOpinion(board.getBoardOpinion());
+        persistance.setModifyDate(board.getModifyDate());
+        System.out.println(board.getModifyDate());
     }
 }
