@@ -1,22 +1,20 @@
 package com.example.CafeTour.service;
 
-import com.example.CafeTour.auth.PrincipalDetails;
 import com.example.CafeTour.domain.User;
 import com.example.CafeTour.domain.UserRole;
 import com.example.CafeTour.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -74,5 +72,19 @@ public class UserService implements UserDetailsService{
         String encPassword=encoder.encode(rawPassword);
         persistance.setPw(encPassword);
         persistance.setNickName(username);
+    }
+
+    @Transactional
+    public boolean deleteUser(String password, Principal principal) {
+        User persistance = userRepository.findByEmail(principal.getName()).orElseThrow(()
+                -> {
+            return new IllegalArgumentException("회원찾기 실패");
+        });
+
+        if(encoder.matches(password,persistance.getPw())){
+            userRepository.deleteById(persistance.getId());
+            return true;
+        }
+        return false;
     }
 }

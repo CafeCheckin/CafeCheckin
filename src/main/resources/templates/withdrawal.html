@@ -65,30 +65,18 @@
 <body class="text-center">
 
 <main class="form-signin w-100 m-auto">
-        <h1 class="h3 mb-3 fw-normal"><span th:text="${userinfo2.nickName}"></span> 님의 회원정보</h1>
-        <div class="form-floating">
-            <input type="hidden" class="form-control" id="uid" th:value="${userinfo2.Id}">
-        </div>
+    <form action="/deleteuser"method="post">
+        <h1 class="h3 mb-3 fw-normal"><span th:text="${userinfo2.nickName}"></span> 님의 회원정보 수정</h1>
 
         <div class="form-floating">
-            <input type="text" class="form-control" id="email" th:value="${userinfo2.email}" readonly="readonly">
-            <label for="email"> 이메일</label>
+            <input type="password" class="form-control"  name="password" id="password">
+            <label for="password">비밀번호</label>
         </div>
 
-        <div class="form-floating">
-            <input type="text" class="form-control" id="nickname" th:value="${userinfo2.nickName}" readonly="readonly">
-            <label for="nickname">닉네임</label>
-        </div>
-
-        <div class="form-floating">
-            <input type="password" class="form-control" id="password" th:value="${userinfo2.Pw}" readonly="readonly">
-            <label for="nickname">비밀번호</label>
-        </div>
-    <div class="container" style="width: auto">
-        <a class="w-40 btn btn-sm btn-primary" style="margin-top: 15px" href="/cafe" role="button">뒤로가기</a>
-        <a class="w-40 btn btn-sm btn-primary" style="margin-top: 15px" href="/usercheck" role="button">회원탈퇴</a>
-        <a class="w-40 btn btn-sm btn-primary" style="margin-top: 15px" href="/userInfoUpdate" role="button">회원정보수정</a>
-    </div>
+        <a class="w-40 btn btn-lg btn-primary" style="margin-top: 15px" href="/cafe" role="button">뒤로가기</a>
+        <button class="w-40 btn btn-lg btn-primary" style="margin-top: 15px; margin-left: 20px" type="submit">탈퇴</button>
+        <!--!> <a class="w-40 btn btn-lg btn-primary" style="margin-top: 15px; margin-left: 20px" type="">수정완료</a><-->
+    </form>
 </main>
 
 
