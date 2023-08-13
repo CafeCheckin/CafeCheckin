@@ -3,10 +3,9 @@ package com.example.CafeTour.domain;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.stereotype.Component;
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "boarding")
@@ -19,6 +18,9 @@ public class Board {
     @JoinColumn(name ="user_id")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
+
+    @OneToMany(mappedBy = "board",fetch = FetchType.EAGER) //mappedBy는 연관관계의주인X, FK가 아니니 컬럼생성X
+    private List<Reply> reply;
 
     @Lob
     private String boardOpinion;

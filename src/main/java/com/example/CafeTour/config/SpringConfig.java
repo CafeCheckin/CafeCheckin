@@ -16,9 +16,6 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SpringConfig  {
-
-    private final DataSource dataSource;
-
     @Bean
     public PasswordEncoder encoder(){
         return new BCryptPasswordEncoder();
@@ -51,19 +48,5 @@ public class SpringConfig  {
     AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-/*
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth)
-            throws Exception {
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .passwordEncoder(encoderPwd())
-                .usersByUsernameQuery("select email,Pw, enabled "
-                        + "from user "
-                        + "where email = ?")
-                .authoritiesByUsernameQuery("select email,authority "
-                        + "from user "
-                        + "where email = ?");
-    }*/
 }
 

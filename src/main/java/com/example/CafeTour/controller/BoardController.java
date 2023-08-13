@@ -16,7 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
-    private final BoardRepository boardRepository;
     private final UserService userService;
 
     @GetMapping("/boarding") //글 작성
@@ -33,7 +32,6 @@ public class BoardController {
 
     @GetMapping("/board")  //게시글 목록
     public String list(Model model, Principal details) {
-        List<Board> boardList = boardRepository.findAll();
         model.addAttribute("li", boardService.boardingList());
         return "BoardList";
     }

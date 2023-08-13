@@ -1,12 +1,8 @@
 package com.example.CafeTour.dto;
 
-import com.example.CafeTour.domain.User;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-
-import javax.persistence.Column;
 import java.sql.Timestamp;
 
 @Data

@@ -4,7 +4,6 @@ import com.example.CafeTour.domain.User;
 import com.example.CafeTour.domain.UserRole;
 import com.example.CafeTour.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +21,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 public class UserService implements UserDetailsService{
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
     private final PasswordEncoder encoder;
-
 
     public User create(String username, String email, String password) {
         User user = new User();
@@ -35,7 +31,7 @@ public class UserService implements UserDetailsService{
         user.setPw(encoder.encode(password));
         this.userRepository.save(user);
         return user;
-    }
+    } //회원 추가
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -68,11 +64,10 @@ public class UserService implements UserDetailsService{
                 ->{return new IllegalArgumentException("회원찾기 실패");
         });
         String rawPassword=password;
-        System.out.println(rawPassword);
         String encPassword=encoder.encode(rawPassword);
         persistance.setPw(encPassword);
         persistance.setNickName(username);
-    }
+    } //회원 정보 업데이트
 
     @Transactional
     public boolean deleteUser(String password, Principal principal) {
@@ -86,5 +81,5 @@ public class UserService implements UserDetailsService{
             return true;
         }
         return false;
-    }
+    } //회원탈퇴
 }
