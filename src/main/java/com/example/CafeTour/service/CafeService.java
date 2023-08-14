@@ -11,7 +11,7 @@ import java.util.List;
 public class CafeService {
     private final CafeRepository cafeRepository;
 
-    public List<CafeInformation> findCafe(){
-        return cafeRepository.findAll();
+    public List<CafeInformation> findCafe(String name){
+        return cafeRepository.findByAddressContaining(name);
     }
 }

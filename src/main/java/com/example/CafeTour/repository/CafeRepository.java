@@ -7,4 +7,6 @@ import java.util.List;
 public interface CafeRepository extends JpaRepository<CafeInformation, Long> {
     @Override
     List<CafeInformation> findAll();
+
+    List<CafeInformation> findByAddressContaining(String name);
 }
