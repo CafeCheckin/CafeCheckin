@@ -108,7 +108,7 @@
 <div class="map-frame">
     <div id="map" style="height:400px;"></div>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=99bc8b99d1db80a6977426d3c400fc14"></script>
-    <script>
+    <script th:lnline="javascript">
         var container = document.getElementById('map');
         var options = {
             center: new kakao.maps.LatLng(37.2625068, 127.0446724),
@@ -157,7 +157,7 @@
             [36.511513, 127.258927, '<div style="padding:5px;" >도램마을 8단지<br><a href="/board" style="color:blue" target="_blank">상세보기</a></div>'],
             [36.514043, 127.263682, '<div style="padding:5px;">도담 고등학교</div>'],
             [36.514494, 127.254835, '<div style="padding:5px;">늘봄 초등학교</div>'],
-            [36.511590, 127.262530, '<div style="padding:5px;">도담 초등학교</div>']
+            [36.511590, 127.262530, '<div style="padding:5px;">도담 초등학교</div>'],
         ];
 
         for (var i = 0; i < 데이터.length; i++ ) {

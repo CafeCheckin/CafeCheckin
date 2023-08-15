@@ -17,7 +17,9 @@ public class CafeController {
         String name=httpServletRequest.getParameter("seoul");
         System.out.println(name);
         model.addAttribute("location",cafeService.findCafe(name));
-        return "/SeoulCafe/"+name;
+        model.addAttribute("mess","성공");
+        return "home";
+       // return "/SeoulCafe/"+name;
     }
 
 
