@@ -9,7 +9,7 @@ public class CafeInformation {
         @javax.persistence.Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "Id")
-        private Long Id;
+        private Long id;
 
         @Column(name = "cafe_name")
         private String cafeName;

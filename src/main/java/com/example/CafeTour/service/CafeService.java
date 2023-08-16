@@ -1,9 +1,12 @@
 package com.example.CafeTour.service;
 
+import com.example.CafeTour.domain.Board;
 import com.example.CafeTour.domain.CafeInformation;
 import com.example.CafeTour.repository.CafeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
@@ -14,4 +17,12 @@ public class CafeService {
     public List<CafeInformation> findCafe(String name){
         return cafeRepository.findByAddressContaining(name);
     }
+
+    @Transactional(readOnly = true)
+    public CafeInformation details(Long id){
+        return cafeRepository.findById(id)
+                .orElseThrow(()->{
+                    return new IllegalArgumentException("존재하지 않는 카페");
+                });
+    } //게시판 세부사항 조회
 }

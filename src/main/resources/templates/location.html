@@ -115,9 +115,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="cafe : ${location}">
+                    <tr th:each="cafe : ${locations}">
                         <td>
-                            <a th:text="${cafe.cafeName}" th:href="@{/view(id=${cafe.id})}"></a>
+                            <a th:text="${cafe.cafeName}"></a>
                         </td>
                         <td th:text="${cafe.openAt}"></td>
                         <td th:text="${cafe.closeAt}"></td>
