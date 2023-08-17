@@ -141,21 +141,24 @@
 
     <div class="card">
         <div class="card-header">카페 리뷰List</div>
-        <ui class="list-group">
-            <tr th:each="board : ${locations}">
-                <li class="list-group-item d-flex justify-content-between">
-                    <td>
-                        <a th:text="${board.title}" th:href="@{/view(id=${board.id})}"></a>
-                    </td>
-                    <span>작성자: <td th:text="${board.user.nickName}"></td></span>
-                </li>
-            </tr>
-        </ui>
+            <ui class="list-group">
+                <tr th:each="board : ${review}">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <td>
+                            <a th:utext="${board.reviewText}"></a>
+                        </td>
+                        <span>작성자: <td th:text="${board.user.nickName}"></td></span>
+                    </li>
+                </tr>
+            </ui>
+        </div>
+
     </div>
 
     <div class="form-group">
-    <a class="btn btn-outline-primary" style="float: right;margin-top: 10px" href="/boarding" role="button">리뷰 등록</a>
+    <a class="btn btn-outline-primary" style="float: right;margin-top: 10px" th:href="@{/writereview(id=${locations.id})}" role="button">리뷰 등록</a>
     </div>
+
 </div>
 
 <!-- IONICONS -->

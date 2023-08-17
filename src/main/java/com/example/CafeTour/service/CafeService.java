@@ -24,5 +24,5 @@ public class CafeService {
                 .orElseThrow(()->{
                     return new IllegalArgumentException("존재하지 않는 카페");
                 });
-    } //게시판 세부사항 조회
+    } //카페 세부사항 조회
 }

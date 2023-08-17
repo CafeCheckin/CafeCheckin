@@ -1,16 +1,18 @@
 package com.example.CafeTour.domain;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
 
 @Entity
-@Table(name = "boarding")
-@Data
+@Table(name = "cafe_review")
+@Getter
+@Setter
 public class CafeReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,9 +32,6 @@ public class CafeReview {
 
     @Column(name = "grade")
     private int grade;
-
-    @Column(name = "title")
-    private String title;
 
     @Column(name = "review_hit")
     private int reviewHit;

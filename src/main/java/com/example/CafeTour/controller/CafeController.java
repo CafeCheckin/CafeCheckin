@@ -2,6 +2,7 @@ package com.example.CafeTour.controller;
 
 import com.example.CafeTour.domain.Board;
 import com.example.CafeTour.domain.CafeInformation;
+import com.example.CafeTour.service.CafeReviewService;
 import com.example.CafeTour.service.CafeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class CafeController {
     private final CafeService cafeService;
+    private final CafeReviewService cafeReviewService;
 
     @GetMapping("/SeoulCafe")
     public String gangNam(HttpServletRequest httpServletRequest, Model model){
@@ -30,7 +32,7 @@ public class CafeController {
     @GetMapping("/cafeinfo/{id}") //카페 상세조회
     public String findById(@PathVariable Long id, Model model){ //카페의 번호(Id)값을 인자로 받음
         model.addAttribute("locations",cafeService.details(id));
+        model.addAttribute("review",cafeReviewService.reviewList(id));
         return "CafeDetail";
     }
-
 }
