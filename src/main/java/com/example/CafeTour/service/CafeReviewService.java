@@ -27,9 +27,4 @@ public class CafeReviewService {
     public List<CafeReview> reviewList(Long id) {
         return cafeReviewRepository.findByCafeInformationIdOrderByCreateDateDesc(id);
     }
-
-    @Transactional
-    public void deleteById(Long id) {
-        cafeReviewRepository.deleteById(id);
-    }
 }

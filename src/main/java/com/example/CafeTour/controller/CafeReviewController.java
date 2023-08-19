@@ -33,12 +33,7 @@ public class CafeReviewController {
     public String reviewList(Long id,CafeReview cafeReview, Principal principal) {
         User userDto = userService.findByEmail(principal.getName());
         cafeReviewService.write(cafeReview, userDto,cafeService.details(id));
-        return "redirect:/cafeinfo/"+id;
-    }
-
-    @GetMapping("/deleteReview")
-    public String deleteById(Long id){
-        cafeReviewService.deleteById(id);
+        System.out.println(cafeReview.getId());
         return "redirect:/cafeinfo/"+id;
     }
 }
