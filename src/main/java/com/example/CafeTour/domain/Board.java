@@ -1,6 +1,8 @@
 package com.example.CafeTour.domain;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
@@ -9,7 +11,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "boarding")
-@Data
+@Getter
+@Setter
 public class Board {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")

@@ -2,6 +2,7 @@ package com.example.CafeTour.controller;
 
 import com.example.CafeTour.domain.Board;
 import com.example.CafeTour.domain.CafeInformation;
+import com.example.CafeTour.domain.CafeReview;
 import com.example.CafeTour.service.CafeReviewService;
 import com.example.CafeTour.service.CafeService;
 import lombok.RequiredArgsConstructor;
@@ -30,9 +31,14 @@ public class CafeController {
     }
 
     @GetMapping("/cafeinfo/{id}") //카페 상세조회
-    public String findById(@PathVariable Long id, Model model){ //카페의 번호(Id)값을 인자로 받음
+    public String findById(@PathVariable Long id, Model model,Principal principal){ //카페의 번호(Id)값을 인자로 받음
         model.addAttribute("locations",cafeService.details(id));
+        CafeReview cafeReview= (CafeReview) cafeReviewService.reviewList(id);
         model.addAttribute("review",cafeReviewService.reviewList(id));
-        return "CafeDetail";
+
+        if(principal.getName().equals(cafeReview.getUser().getEmail()))
+            return "CafeDetail";
+        else
+            return "NotCafeDetail";
     }
 }

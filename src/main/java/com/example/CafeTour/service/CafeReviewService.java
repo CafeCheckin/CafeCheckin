@@ -27,4 +27,25 @@ public class CafeReviewService {
     public List<CafeReview> reviewList(Long id) {
         return cafeReviewRepository.findByCafeInformationIdOrderByCreateDateDesc(id);
     }
+
+    public void deleteById(Long id) {
+        cafeReviewRepository.deleteById(id);
+    } //리뷰 삭제
+
+    @Transactional
+    public void updateReview(CafeReview cafeReview,Long id) {
+        CafeReview persistance=cafeReviewRepository.findById(id).orElseThrow(()
+                ->{return new IllegalArgumentException("글 찾기 실패");
+        });
+        persistance.setReviewText(cafeReview.getReviewText());
+        persistance.setModifyDate(cafeReview.getModifyDate());
+    } //리뷰 수정
+
+    @Transactional
+    public CafeReview details(Long id){
+        return cafeReviewRepository.findById(id)
+                .orElseThrow(()->{
+                    return new IllegalArgumentException("리뷰 상세보기 실패");
+                });
+    }
 }

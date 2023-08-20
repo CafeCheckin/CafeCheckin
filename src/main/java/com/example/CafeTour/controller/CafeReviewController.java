@@ -33,7 +33,25 @@ public class CafeReviewController {
     public String reviewList(Long id,CafeReview cafeReview, Principal principal) {
         User userDto = userService.findByEmail(principal.getName());
         cafeReviewService.write(cafeReview, userDto,cafeService.details(id));
-        System.out.println(cafeReview.getId());
         return "redirect:/cafeinfo/"+id;
+    }
+
+    @GetMapping("/deletereview")
+    public String deleteReview(Long id,Long cid){ //리뷰의 Id
+        cafeReviewService.deleteById(id);
+        return "redirect:/cafeinfo/"+cid;
+    }
+
+    @GetMapping("/reviewupdate")
+    public String reviewUpdateForm(Long id,Model model,Long cid) {
+        model.addAttribute("reviewdetail",cafeReviewService.details(id));
+        model.addAttribute("cafeinfo",cid);
+        return "UpdateReview";
+    }
+
+    @PostMapping("/updatereview")
+    public String reviewUpdate(Long id,CafeReview cafeReview,Long cid) {
+        cafeReviewService.updateReview(cafeReview,id);
+        return "redirect:/cafeinfo/"+cid;
     }
 }

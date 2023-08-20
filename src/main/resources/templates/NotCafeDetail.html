@@ -141,24 +141,22 @@
 
     <div class="card">
         <div class="card-header">카페 리뷰List</div>
-            <ui class="list-group">
-                <tr th:each="board : ${review}">
-                    <li class="list-group-item d-flex justify-content-between">
-                        <td>
-                            <a th:utext="${board.reviewText}"></a>
-                        </td>
-                        <span>작성자: <td th:text="${board.user.nickName}"></td></span>
-                        <a class="w-40 btn btn-sm btn-primary" style="float: right; " th:href="@{/deletereview(id=${board.id},cid=${locations.id})}" role="button">삭제</a>
-                        <a class="w-40 btn btn-sm btn-primary" style="float: right; " th:href="@{/reviewupdate(id=${board.id},cid=${locations.id})}" role="button">수정</a>
-                </tr>
-            </ui>
-        </div>
-
+        <ui class="list-group">
+            <tr th:each="board : ${review}">
+                <li class="list-group-item d-flex justify-content-between">
+                    <td>
+                        <a th:utext="${board.reviewText}"></a>
+                    </td>
+                    <span>작성자: <td th:text="${board.user.nickName}"></td></span>
+                  </tr>
+        </ui>
     </div>
 
-    <div class="form-group">
+</div>
+
+<div class="form-group">
     <a class="btn btn-outline-primary" style="float: right;margin-top: 10px" th:href="@{/writereview(id=${locations.id})}" role="button">리뷰 등록</a>
-    </div>
+</div>
 
 </div>
 

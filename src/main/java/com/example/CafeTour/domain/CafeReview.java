@@ -1,17 +1,19 @@
 package com.example.CafeTour.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@DynamicInsert
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "cafe_review")
 @Getter
 @Setter
@@ -24,12 +26,14 @@ public class CafeReview {
     @Lob
     private String reviewText;
 
-    @JoinColumn(name ="user_id")
+
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name ="user_id")
     private User user;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="cafe_information_id")
-    @ManyToOne(fetch = FetchType.EAGER)
     private CafeInformation cafeInformation;
 
     @Column(name = "grade")

@@ -1,6 +1,8 @@
 package com.example.CafeTour.domain;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -8,7 +10,8 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "user")
-@Data
+@Getter
+@Setter
 public class Reply {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

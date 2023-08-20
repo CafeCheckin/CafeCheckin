@@ -1,10 +1,14 @@
 package com.example.CafeTour.domain;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "cafe_information")
-@Data
+@Getter
+@Setter
 public class CafeInformation {
         @javax.persistence.Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
