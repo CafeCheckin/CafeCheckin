@@ -78,8 +78,16 @@
                 <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
                 <a href="#" class="nav__logo">카페 체크인</a>
             </div>
+
             <div class="nav__list">
-                <a href="#" class="nav__link">
+                <a href="/cafe" class="nav__link">
+                    <ion-icon name="home-outline" class="nav__icon"></ion-icon>
+                    <span class="nav_name">홈화면</span>
+                </a>
+            </div>
+
+            <div class="nav__list">
+                <a href="/board" class="nav__link">
                     <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
                     <span class="nav_name">게시판</span>
                 </a>
@@ -137,13 +145,13 @@
 </div>
 
 <div class="map-frame">
-    <div id="map" style="height:300px"></div>
+    <div id="map" style="height:600px"></div>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=99bc8b99d1db80a6977426d3c400fc14"></script>
     <script>
         var container = document.getElementById('map');
         var options = {
             center: new kakao.maps.LatLng(37.5175066,127.0473753),
-            level: 3
+            level: 4
         };
 
         var map = new kakao.maps.Map(container, options);
@@ -186,34 +194,6 @@
             });
         }
     </script>
-</div>
-
-<div class="container" style="margin-top: 10px">
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                    <tr>
-                        <th>카페이름</th>
-                        <th>오픈시간</th>
-                        <th>마감시간</th>
-                        <th>분위기</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="cafe : ${location}">
-                        <td>
-                            <a th:text="${cafe.cafeName}" th:href="@{/view(id=${cafe.id})}"></a>
-                        </td>
-                        <td th:text="${cafe.openAt}"></td>
-                        <td th:text="${cafe.closeAt}"></td>
-                        <td th:text="${cafe.cafeMood}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </form>
 </div>
 <!-- IONICONS -->
 <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>

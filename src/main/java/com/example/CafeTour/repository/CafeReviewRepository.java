@@ -12,5 +12,6 @@ public interface CafeReviewRepository extends JpaRepository<CafeReview,Long> {
     @Override
     Optional<CafeReview> findById(Long aLong);
 
+
     List<CafeReview> findByCafeInformationIdOrderByCreateDateDesc(Long id);
 }

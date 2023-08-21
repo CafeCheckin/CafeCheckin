@@ -23,6 +23,7 @@ public class CafeReviewService {
         cafeReviewRepository.save(cafeReview);
     } //리뷰 글 작성
 
+
     @Transactional(readOnly = true)
     public List<CafeReview> reviewList(Long id) {
         return cafeReviewRepository.findByCafeInformationIdOrderByCreateDateDesc(id);

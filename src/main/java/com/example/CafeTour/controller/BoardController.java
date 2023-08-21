@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 import java.security.Principal;
 import java.util.List;
 
@@ -19,49 +21,58 @@ public class BoardController {
     private final UserService userService;
 
     @GetMapping("/boarding") //글 작성
-    public String boardMain() {
-        return "boarding";
+    public ModelAndView boardMain(ModelAndView mav) {
+        mav.setViewName("boarding");
+        return mav;
     }
 
     @PostMapping("/writeboard") //작성한 게시글 저장
-    public String boardList(Board board, Principal principal) {
+    public ModelAndView boardList(Board board, Principal principal,ModelAndView mav) {
         User userDto = userService.findByEmail(principal.getName());
         boardService.write(board, userDto);
-        return "redirect:/board";
+        mav.setViewName("redirect:/board");
+        return mav;
     }
 
     @GetMapping("/board")  //게시글 목록
-    public String list(Model model, Principal details) {
-        model.addAttribute("li", boardService.boardingList());
-        return "BoardList";
+    public ModelAndView list(ModelAndView mav, Principal details) {
+        mav.addObject("li", boardService.boardingList());
+        mav.setViewName("BoardList");
+        return mav;
     }
 
     @GetMapping("/view") //게시글 상세조회
-    public String findById(Long id,Model model,Principal principal){ //게시글의 번호(Id)값을 인자로 받음
-        model.addAttribute("boarddetail",boardService.details(id));
+    public ModelAndView findById(Long id,ModelAndView mav,Principal principal){ //게시글의 번호(Id)값을 인자로 받음
+        mav.addObject("boarddetail",boardService.details(id));
         Board board=boardService.details(id);
         if(principal.getName().equals(board.getUser().getEmail())){ //글을 작성한 user와 로그인한 사림이 일치한경우
-            return "BoardDetails";
+            mav.setViewName("BoardDetails");
+            return mav;
         }
-        else
-            return "NotUserWriteBoardDetails";
+        else{
+            mav.setViewName("NotUserWriteBoardDetails");
+            return mav;
+        }
     }
 
     @GetMapping("/deleteBoard")
-    public String deleteBoarding(Long id){
+    public ModelAndView deleteBoarding(Long id,ModelAndView mav){
         boardService.deleteById(id);
-        return "redirect:/board";
+        mav.setViewName("redirect:/board");
+        return mav;
     }
 
     @PostMapping("/updateboard")
-    public String boardUpdate(Long id,Board board) {
+    public ModelAndView boardUpdate(Long id,Board board,ModelAndView mav) {
         boardService.updateBoard(board,id);
-        return "redirect:/board";
+        mav.setViewName("redirect:/board");
+        return mav;
     }
 
     @GetMapping("/update")
-    public String boardUpdateForm(Long id,Model model) {
-        model.addAttribute("boarddetail",boardService.details(id));
-        return "BoardUpdate";
+    public ModelAndView boardUpdateForm(Long id,ModelAndView mav) {
+        mav.addObject("boarddetail",boardService.details(id));
+        mav.setViewName("BoardUpdate");
+        return mav;
     }
 }
