@@ -41,7 +41,6 @@ public class SpringConfig  {
                      .logoutSuccessUrl("/home")
                     .invalidateHttpSession(true);
         return http.build();
-
     }
 
     @Bean

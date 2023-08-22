@@ -1,6 +1,5 @@
 package com.example.CafeTour.domain;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -22,7 +21,7 @@ public class Board {
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
-    @OneToMany(mappedBy = "board",fetch = FetchType.EAGER) //mappedBy는 연관관계의주인X, FK가 아니니 컬럼생성X
+    @OneToMany(mappedBy = "board") //mappedBy는 연관관계의주인X, FK가 아니니 컬럼생성X
     private List<Reply> reply;
 
     @Lob

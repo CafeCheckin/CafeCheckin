@@ -4,6 +4,8 @@ import com.example.CafeTour.domain.Board;
 import com.example.CafeTour.domain.User;
 import com.example.CafeTour.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -20,8 +22,8 @@ public class BoardService {
     } //게시판 글 작성
 
     @Transactional(readOnly = true)
-    public List<Board>  boardingList(){
-        return boardRepository.findAll();
+    public Page<Board> boardingList(Pageable pageable){
+        return boardRepository.findAll(pageable);
     } //게시판 목록 출력
 
     @Transactional(readOnly = true)

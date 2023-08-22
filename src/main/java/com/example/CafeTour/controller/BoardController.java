@@ -6,6 +6,9 @@ import com.example.CafeTour.repository.BoardRepository;
 import com.example.CafeTour.service.BoardService;
 import com.example.CafeTour.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +38,10 @@ public class BoardController {
     }
 
     @GetMapping("/board")  //게시글 목록
-    public ModelAndView list(ModelAndView mav, Principal details) {
-        mav.addObject("li", boardService.boardingList());
+    public ModelAndView list(ModelAndView mav, @PageableDefault(size = 3,sort = "id",direction = Sort.Direction.DESC)Pageable pageable) {
+        mav.addObject("li", boardService.boardingList(pageable));
+        mav.addObject("previous", pageable.previousOrFirst().getPageNumber());
+        mav.addObject("next", pageable.next().getPageNumber());
         mav.setViewName("BoardList");
         return mav;
     }

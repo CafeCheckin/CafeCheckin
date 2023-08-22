@@ -126,6 +126,15 @@
                     </tbody>
                 </table>
 
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{/board(page=${previous})}">Previous</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{/board(page=${next})}">Next</a>
+                    </li>
+                </ul>
+
                 <div class="form-group">
                     <a class="btn btn-outline-primary" style="float: right" href="/boarding" role="button">글 등록</a>
                 </div>
