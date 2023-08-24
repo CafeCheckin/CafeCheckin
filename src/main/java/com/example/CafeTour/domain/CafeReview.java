@@ -27,7 +27,7 @@ public class CafeReview {
     private String reviewText;
 
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name ="user_id")
     private User user;
 

@@ -6,11 +6,9 @@ import com.example.CafeTour.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.validation.Valid;
 import java.security.Principal;
 
@@ -26,7 +24,7 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ModelAndView signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult,ModelAndView mav) {
+    public ModelAndView signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult, ModelAndView mav) {
         if (bindingResult.hasErrors()) {
             mav.setViewName("signup_form");
             return mav;
@@ -57,46 +55,45 @@ public class UserController {
         return mav;
     }
 
-    @GetMapping("/userInfoUpdate")
+    @GetMapping("/user-info-update")
     public ModelAndView userInfo(ModelAndView mav, Principal principal) {
         User userDto = userService.findByEmail(principal.getName());
         mav.addObject("userinfo2", userDto);
-        mav.setViewName("UserUpdateForm");
+        mav.setViewName("user_update_form");
         return mav;
     }
 
-    @PostMapping("/userInfoUpdate")
-    public ModelAndView userInfoUpdate(@RequestParam String username, String password1, String email,ModelAndView mav) {
+    @PostMapping("/user-info-update")
+    public ModelAndView userInfoUpdate(@RequestParam String username, String password1, String email, ModelAndView mav) {
         userService.updateUser(username, password1, email);
         mav.setViewName("cafe");
         return mav;
     }
 
-    @GetMapping("/userinfo")
+    @GetMapping("/user-info")
     public ModelAndView findByEmail(ModelAndView mav, Principal principal) {
         User userDto = userService.findByEmail(principal.getName());
         mav.addObject("userinfo2", userDto);
-        mav.setViewName("UserInfo");
+        mav.setViewName("user_info");
         return mav;
     }
 
-    @GetMapping("usercheck")
+    @GetMapping("user-check")
     public ModelAndView userCheck(ModelAndView mav, Principal principal) {
         User userDto = userService.findByEmail(principal.getName());
         mav.addObject("userinfo2", userDto);
-        mav.setViewName("withdrawal");
+        mav.setViewName("user_withdrawal");
         return mav;
     }
 
-    @PostMapping("deleteuser")
-    public ModelAndView deleteUser(@RequestParam String password, Principal principal,ModelAndView mav) {
+    @PostMapping("delete-user")
+    public ModelAndView deleteUser(@RequestParam String password, Principal principal, ModelAndView mav) {
         boolean result = userService.deleteUser(password, principal);
-        if (result == true){
+        if (result == true) {
             mav.setViewName("redirect:/home");
             return mav;
-        }
-        else {
-            mav.setViewName("/usercheck");
+        } else {
+            mav.setViewName("/user-check");
             return mav;
         }
     }

@@ -19,54 +19,54 @@ public class CafeReviewController {
     private final CafeReviewService cafeReviewService;
     private final CafeService cafeService;
 
-    @GetMapping("/writereview")
-    public ModelAndView writeReview(Long id, ModelAndView mav){
-        mav.addObject("cafeinfo",id);
-        mav.setViewName("WriteReview");
+    @GetMapping("/write-review")
+    public ModelAndView writeReview(Long cafeId, ModelAndView mav){
+        mav.addObject("cafeInfo",cafeId);
+        mav.setViewName("write_review");
         return mav;
     }
 
-    @PostMapping("/writereview") //작성한 리뷰 저장
-    public ModelAndView reviewList(Long id,CafeReview cafeReview, Principal principal,ModelAndView mav) {
+    @PostMapping("/write-review") //작성한 리뷰 저장
+    public ModelAndView reviewList(Long cafeId,CafeReview cafeReview, Principal principal,ModelAndView mav) {
         User userDto = userService.findByEmail(principal.getName());
-        cafeReviewService.write(cafeReview, userDto,cafeService.details(id));
-        mav.setViewName("redirect:/cafeinfo/"+id);
+        cafeReviewService.write(cafeReview, userDto,cafeService.details(cafeId));
+        mav.setViewName("redirect:/cafe-info/"+cafeId);
         return mav;
     }
 
-    @GetMapping("/deletereview")
-    public ModelAndView deleteReview(Long id,Long cid,ModelAndView mav){ //리뷰의 Id
-        cafeReviewService.deleteById(id);
-        mav.setViewName("redirect:/cafeinfo/"+cid);
+    @GetMapping("/delete-review")
+    public ModelAndView deleteReview(Long reviewId,Long cafeId,ModelAndView mav){ //리뷰의 Id
+        cafeReviewService.deleteById(reviewId);
+        mav.setViewName("redirect:/cafe-info/"+cafeId);
         return mav;
     }
 
-    @GetMapping("/reviewupdate")
-    public ModelAndView reviewUpdateForm(Long id,ModelAndView mav,Long cid) {
+    @GetMapping("/review-update")
+    public ModelAndView reviewUpdateForm(Long id,ModelAndView mav,Long cafeId) {
         mav.addObject("reviewdetail",cafeReviewService.details(id));
-        mav.addObject("cafeinfo",cid);
-        mav.setViewName("UpdateReview");
+        mav.addObject("cafeInfo",cafeId);
+        mav.setViewName("update_review");
         return mav;
     }
 
-    @PostMapping("/updatereview")
-    public ModelAndView reviewUpdate(Long id,CafeReview cafeReview,Long cid,ModelAndView mav) {
-        cafeReviewService.updateReview(cafeReview,id);
-        mav.setViewName("redirect:/cafeinfo/"+cid);
+    @PostMapping("/update-review")
+    public ModelAndView reviewUpdate(Long reviewId,Long cafeId, CafeReview cafeReview,ModelAndView mav) {
+        cafeReviewService.updateReview(cafeReview,reviewId);
+        mav.setViewName("redirect:/cafe-info/"+cafeId);
         return mav;
     }
 
-    @GetMapping("/reviewdetail")
-    public ModelAndView findById(Long id,ModelAndView mav,Principal principal,Long cid){
-        mav.addObject("reviewdetail",cafeReviewService.details(id));
-        mav.addObject("cafeinfo",cid);
-        CafeReview cafeReview=cafeReviewService.details(id);
+    @GetMapping("/review-detail")
+    public ModelAndView findById(Long reviewId,Long cafeId,ModelAndView mav,Principal principal){
+        mav.addObject("reviewdetail",cafeReviewService.details(reviewId));
+        mav.addObject("cafeinfo",cafeId);
+        CafeReview cafeReview=cafeReviewService.details(reviewId);
         if(principal.getName().equals(cafeReview.getUser().getEmail())){ //글을 작성한 user와 로그인한 사림이 일치한경우
-            mav.setViewName("ReviewDetail");
+            mav.setViewName("review_detail");
             return mav;
         }
         else{
-            mav.setViewName("NotReviewDetail");
+            mav.setViewName("not_review_detail");
             return mav;
         }
     }

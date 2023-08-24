@@ -2,7 +2,6 @@ package com.example.CafeTour.controller;
 
 import com.example.CafeTour.domain.Board;
 import com.example.CafeTour.domain.User;
-import com.example.CafeTour.repository.BoardRepository;
 import com.example.CafeTour.service.BoardService;
 import com.example.CafeTour.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -10,12 +9,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -29,7 +25,7 @@ public class BoardController {
         return mav;
     }
 
-    @PostMapping("/writeboard") //작성한 게시글 저장
+    @PostMapping("/write-board") //작성한 게시글 저장
     public ModelAndView boardList(Board board, Principal principal,ModelAndView mav) {
         User userDto = userService.findByEmail(principal.getName());
         boardService.write(board, userDto);
@@ -38,46 +34,46 @@ public class BoardController {
     }
 
     @GetMapping("/board")  //게시글 목록
-    public ModelAndView list(ModelAndView mav, @PageableDefault(size = 3,sort = "id",direction = Sort.Direction.DESC)Pageable pageable) {
+    public ModelAndView list(ModelAndView mav, @PageableDefault(size = 5,sort = "id",direction = Sort.Direction.DESC)Pageable pageable) {
         mav.addObject("li", boardService.boardingList(pageable));
         mav.addObject("previous", pageable.previousOrFirst().getPageNumber());
         mav.addObject("next", pageable.next().getPageNumber());
-        mav.setViewName("BoardList");
+        mav.setViewName("board_list");
         return mav;
     }
 
     @GetMapping("/view") //게시글 상세조회
-    public ModelAndView findById(Long id,ModelAndView mav,Principal principal){ //게시글의 번호(Id)값을 인자로 받음
-        mav.addObject("boarddetail",boardService.details(id));
-        Board board=boardService.details(id);
+    public ModelAndView findById(Long boardId,ModelAndView mav,Principal principal){ //게시글의 번호(Id)값을 인자로 받음
+        mav.addObject("boarddetail",boardService.details(boardId));
+        Board board=boardService.details(boardId);
         if(principal.getName().equals(board.getUser().getEmail())){ //글을 작성한 user와 로그인한 사림이 일치한경우
-            mav.setViewName("BoardDetails");
+            mav.setViewName("board_details");
             return mav;
         }
         else{
-            mav.setViewName("NotUserWriteBoardDetails");
+            mav.setViewName("notuser_writeboard_details");
             return mav;
         }
     }
 
-    @GetMapping("/deleteBoard")
-    public ModelAndView deleteBoarding(Long id,ModelAndView mav){
-        boardService.deleteById(id);
+    @GetMapping("/delete-board")
+    public ModelAndView deleteBoarding(Long boardId,ModelAndView mav){
+        boardService.deleteById(boardId);
         mav.setViewName("redirect:/board");
         return mav;
     }
 
-    @PostMapping("/updateboard")
-    public ModelAndView boardUpdate(Long id,Board board,ModelAndView mav) {
-        boardService.updateBoard(board,id);
+    @PostMapping("/update-board")
+    public ModelAndView boardUpdate(Long boardId,Board board,ModelAndView mav) {
+        boardService.updateBoard(board,boardId);
         mav.setViewName("redirect:/board");
         return mav;
     }
 
     @GetMapping("/update")
-    public ModelAndView boardUpdateForm(Long id,ModelAndView mav) {
-        mav.addObject("boarddetail",boardService.details(id));
-        mav.setViewName("BoardUpdate");
+    public ModelAndView boardUpdateForm(Long boardId,ModelAndView mav) {
+        mav.addObject("boarddetail",boardService.details(boardId));
+        mav.setViewName("board_update");
         return mav;
     }
 }

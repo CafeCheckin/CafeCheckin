@@ -74,24 +74,18 @@
 <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom justify-content-center">
     <span class="fs-4 fw-bold" style="margin-top: 15px">리뷰 상세보기</span>
 </div>
-<form action="/deleteBoard" method="post">
     <div class="container">
         <div>
             리뷰 번호 : <span id="id" typeof=""><i th:text="${reviewdetail.id}"></i></span>
             작성자 : <span th:text="${reviewdetail.user.nickName}"></span>
-            작성일 : <span th:text="${reviewdetail.createDate}"></span>
-            수정일 : <span th:text="${reviewdetail.modifyDate}"></span>
         </div>
 
         <div class="form-group">
-            <div><span class="text-dark mb-0" style="width:100%; overflow:hidden; word-break:break-all "th:utext="${reviewdetail.reviewText}"></span></div>
+            <div><span class="text-dark mb-0" style="display: block; max-width: 800px" th:utext="${reviewdetail.reviewText}"></span></div>
         </div>
         <hr/>
         <a class="w-40 btn btn-lg btn-primary" style="float: left" onclick="history.back()" role="button">뒤로가기</a>
-        <a class="w-40 btn btn-lg btn-primary" style="float: right" th:href="@{/reviewupdate(id=${reviewdetail.id},cid=${cafeinfo})}" role="button">수정</a>
-        <a class="w-40 btn btn-lg btn-primary" style="float: right; margin-right: 15px" th:href="@{/deletereview(id=${reviewdetail.id},cid=${cafeinfo})}" role="button">삭제</a>
     </div>
-</form>
 
 <!-- IONICONS -->
 <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>

@@ -145,7 +145,7 @@
                 <tr th:each="board : ${review}">
                     <li class="list-group-item d-flex justify-content-between">
                         <td>
-                            <a style="display:block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 300px" th:utext="${board.reviewText}" th:href="@{/reviewdetail(id=${board.id},cid=${locations.id})}">
+                            <a style="display:block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 300px" th:utext="${board.reviewText}" th:href="@{/review-detail(reviewId=${board.id},cafeId=${locations.id})}">
                             </a>
                         </td>
                         <span>작성자: <td th:text="${board.user.nickName}"></td></span>
@@ -156,7 +156,7 @@
     </div>
 
     <div class="form-group">
-    <a class="btn btn-outline-primary" style="float: right;margin-top: 10px" th:href="@{/writereview(id=${locations.id})}" role="button">리뷰 등록</a>
+    <a class="btn btn-outline-primary" style="float: right;margin-top: 10px" th:href="@{/write-review(cafeId=${locations.id})}" role="button">리뷰 등록</a>
     </div>
 
 </div>

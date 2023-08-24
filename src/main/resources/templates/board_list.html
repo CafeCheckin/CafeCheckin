@@ -118,7 +118,7 @@
                     <tr th:each="board : ${li}">
                         <td th:text="${board.user.nickName}"></td>
                         <td>
-                            <a th:text="${board.title}" th:href="@{/view(id=${board.id})}"></a>
+                            <a th:text="${board.title}" th:href="@{/view(boardId=${board.id})}"></a>
                         </td>
                         <td th:text="${board.createDate}"></td>
                         <td th:text="${board.modifyDate}"></td>
