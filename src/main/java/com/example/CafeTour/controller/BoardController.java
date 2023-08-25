@@ -3,6 +3,7 @@ package com.example.CafeTour.controller;
 import com.example.CafeTour.domain.Board;
 import com.example.CafeTour.domain.User;
 import com.example.CafeTour.service.BoardService;
+import com.example.CafeTour.service.CommentService;
 import com.example.CafeTour.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -18,10 +19,11 @@ import java.security.Principal;
 public class BoardController {
     private final BoardService boardService;
     private final UserService userService;
+    private final CommentService commentService;
 
     @GetMapping("/boarding") //글 작성
     public ModelAndView boardMain(ModelAndView mav) {
-        mav.setViewName("boarding");
+        mav.setViewName("/boards/boarding");
         return mav;
     }
 
@@ -38,20 +40,22 @@ public class BoardController {
         mav.addObject("li", boardService.boardingList(pageable));
         mav.addObject("previous", pageable.previousOrFirst().getPageNumber());
         mav.addObject("next", pageable.next().getPageNumber());
-        mav.setViewName("board_list");
+        mav.setViewName("/boards/board_list");
         return mav;
     }
 
-    @GetMapping("/view") //게시글 상세조회
-    public ModelAndView findById(Long boardId,ModelAndView mav,Principal principal){ //게시글의 번호(Id)값을 인자로 받음
-        mav.addObject("boarddetail",boardService.details(boardId));
+    @GetMapping("/view/{boardId}") //게시글 상세조회
+    public ModelAndView findById(@PathVariable Long boardId,ModelAndView mav,Principal principal){ //게시글의 번호(Id)값을 인자로 받음
         Board board=boardService.details(boardId);
+        mav.addObject("boarddetail",boardService.details(boardId));
+        mav.addObject("comments",commentService.list(boardId));
+        boardService.updateView(boardId);
         if(principal.getName().equals(board.getUser().getEmail())){ //글을 작성한 user와 로그인한 사림이 일치한경우
-            mav.setViewName("board_details");
+            mav.setViewName("/boards/board_details");
             return mav;
         }
         else{
-            mav.setViewName("notuser_writeboard_details");
+            mav.setViewName("/boards/notuser_writeboard_details");
             return mav;
         }
     }
@@ -73,7 +77,7 @@ public class BoardController {
     @GetMapping("/update")
     public ModelAndView boardUpdateForm(Long boardId,ModelAndView mav) {
         mav.addObject("boarddetail",boardService.details(boardId));
-        mav.setViewName("board_update");
+        mav.setViewName("/boards/board_update");
         return mav;
     }
 }

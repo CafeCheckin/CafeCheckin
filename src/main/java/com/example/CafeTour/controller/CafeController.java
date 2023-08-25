@@ -28,7 +28,7 @@ public class CafeController {
     public ModelAndView gangNam(HttpServletRequest httpServletRequest, ModelAndView mav) {
         String name = httpServletRequest.getParameter("seoul");
         mav.addObject("location", cafeService.findCafe(name));
-        mav.setViewName("/seoul-cafe/" + name);
+        mav.setViewName("/SeoulCafe/" + name);
         return mav;
     }
 
@@ -36,7 +36,7 @@ public class CafeController {
     public ModelAndView findById(@PathVariable Long cafeId, ModelAndView mav) { //카페의 번호(Id)값을 인자로 받음
         mav.addObject("locations", cafeService.details(cafeId));
         mav.addObject("review", cafeReviewService.reviewList(cafeId));
-        mav.setViewName("cafe_detail");
+        mav.setViewName("/cafes/cafe_detail");
         return mav;
     }
 }

@@ -97,7 +97,7 @@
 
 <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
     <span class="fs-4" >카페 체크인 게시판</span>
-    <a class="btn btn-outline-primary" style="margin-left: 30px;" href="/userinfo" role="button">내 정보</a>
+    <a class="btn btn-outline-primary" style="margin-left: 30px;" href="/user-info" role="button">내 정보</a>
     <a class="btn btn-primary" style="margin-left: 30px;" href="/logout" role="button">로그아웃</a>
 </div>
 
@@ -112,16 +112,18 @@
                         <th>제목</th>
                         <th>등록일</th>
                         <th>수정일</th>
+                        <th>조회수</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="board : ${li}">
                         <td th:text="${board.user.nickName}"></td>
                         <td>
-                            <a th:text="${board.title}" th:href="@{/view(boardId=${board.id})}"></a>
+                            <a th:text="${board.title}" th:href="@{/view/{boardId}(boardId=${board.id})}"></a>
                         </td>
                         <td th:text="${board.createDate}"></td>
                         <td th:text="${board.modifyDate}"></td>
+                        <td th:text="${board.clicks}"></td>
                     </tr>
                     </tbody>
                 </table>

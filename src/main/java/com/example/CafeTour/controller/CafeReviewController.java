@@ -22,7 +22,7 @@ public class CafeReviewController {
     @GetMapping("/write-review")
     public ModelAndView writeReview(Long cafeId, ModelAndView mav){
         mav.addObject("cafeInfo",cafeId);
-        mav.setViewName("write_review");
+        mav.setViewName("/reviews/write_review");
         return mav;
     }
 
@@ -45,7 +45,7 @@ public class CafeReviewController {
     public ModelAndView reviewUpdateForm(Long id,ModelAndView mav,Long cafeId) {
         mav.addObject("reviewdetail",cafeReviewService.details(id));
         mav.addObject("cafeInfo",cafeId);
-        mav.setViewName("update_review");
+        mav.setViewName("/reviews/update_review");
         return mav;
     }
 
@@ -58,15 +58,15 @@ public class CafeReviewController {
 
     @GetMapping("/review-detail")
     public ModelAndView findById(Long reviewId,Long cafeId,ModelAndView mav,Principal principal){
-        mav.addObject("reviewdetail",cafeReviewService.details(reviewId));
-        mav.addObject("cafeinfo",cafeId);
         CafeReview cafeReview=cafeReviewService.details(reviewId);
+        mav.addObject("reviewdetail",cafeReview);
+        mav.addObject("cafeinfo",cafeId);
         if(principal.getName().equals(cafeReview.getUser().getEmail())){ //글을 작성한 user와 로그인한 사림이 일치한경우
-            mav.setViewName("review_detail");
+            mav.setViewName("/reviews/review_detail");
             return mav;
         }
         else{
-            mav.setViewName("not_review_detail");
+            mav.setViewName("/reviews/not_review_detail");
             return mav;
         }
     }

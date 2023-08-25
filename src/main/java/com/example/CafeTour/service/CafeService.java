@@ -1,6 +1,5 @@
 package com.example.CafeTour.service;
 
-import com.example.CafeTour.domain.Board;
 import com.example.CafeTour.domain.CafeInformation;
 import com.example.CafeTour.repository.CafeRepository;
 import lombok.RequiredArgsConstructor;

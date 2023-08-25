@@ -8,7 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +33,7 @@ public class BoardService {
                 .orElseThrow(()->{
                     return new IllegalArgumentException("글 상세보기 실패");
                 });
+
     } //게시판 세부사항 조회
 
     public void deleteById(Long id) {
@@ -48,4 +50,9 @@ public class BoardService {
         persistance.setModifyDate(board.getModifyDate());
         System.out.println(board.getModifyDate());
     } //게시글 수정
+
+    @Transactional
+    public void updateView(Long boardId) {
+        boardRepository.updateView(boardId);
+    }
 }

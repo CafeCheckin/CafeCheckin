@@ -19,21 +19,21 @@ public class UserController {
 
     @GetMapping("/signup")
     public ModelAndView signup(ModelAndView mav) {
-        mav.setViewName("signup_form");
+        mav.setViewName("/users/signup_form");
         return mav;
     }
 
     @PostMapping("/signup")
     public ModelAndView signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult, ModelAndView mav) {
         if (bindingResult.hasErrors()) {
-            mav.setViewName("signup_form");
+            mav.setViewName("/users/signup_form");
             return mav;
         }
 
         if (!userCreateForm.getPassword1().equals(userCreateForm.getPassword2())) {
             bindingResult.rejectValue("password2", "passwordInCorrect",
                     "2개의 패스워드가 일치하지 않습니다.");
-            mav.setViewName("signup_form");
+            mav.setViewName("/users/signup_form");
             return mav;
         }
         try {
@@ -43,12 +43,12 @@ public class UserController {
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
-            mav.setViewName("signup_form");
+            mav.setViewName("/users/signup_form");
             return mav;
         } catch (Exception e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", e.getMessage());
-            mav.setViewName("signup_form");
+            mav.setViewName("/users/signup_form");
             return mav;
         }
         mav.setViewName("home");
@@ -59,7 +59,7 @@ public class UserController {
     public ModelAndView userInfo(ModelAndView mav, Principal principal) {
         User userDto = userService.findByEmail(principal.getName());
         mav.addObject("userinfo2", userDto);
-        mav.setViewName("user_update_form");
+        mav.setViewName("/users/user_update_form");
         return mav;
     }
 
@@ -74,7 +74,7 @@ public class UserController {
     public ModelAndView findByEmail(ModelAndView mav, Principal principal) {
         User userDto = userService.findByEmail(principal.getName());
         mav.addObject("userinfo2", userDto);
-        mav.setViewName("user_info");
+        mav.setViewName("/users/user_info");
         return mav;
     }
 
@@ -82,7 +82,7 @@ public class UserController {
     public ModelAndView userCheck(ModelAndView mav, Principal principal) {
         User userDto = userService.findByEmail(principal.getName());
         mav.addObject("userinfo2", userDto);
-        mav.setViewName("user_withdrawal");
+        mav.setViewName("/users/user_withdrawal");
         return mav;
     }
 

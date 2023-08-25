@@ -22,12 +22,12 @@ public class Board {
     private User user;
 
     @OneToMany(mappedBy = "board") //mappedBy는 연관관계의주인X, FK가 아니니 컬럼생성X
-    private List<Reply> reply;
+    private List<Comment> reply;
 
     @Lob
     private String boardOpinion;
 
-    @Column(name = "clicks")
+    @Column(name = "clicks",columnDefinition = "integer default 0",nullable = false)
     private int clicks;
 
     @Column(name = "title")
