@@ -10,12 +10,17 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+
 import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SpringConfig  {
+public class SpringConfig{
+
+    private final AuthenticationFailureHandler customFailureHandler;
+
     @Bean
     public PasswordEncoder encoder(){
         return new BCryptPasswordEncoder();
@@ -31,7 +36,8 @@ public class SpringConfig  {
                 .and()
 
                 .formLogin()
-                    .loginPage("/lll").permitAll()
+                    .loginPage("/lll")
+                    .permitAll()
                     .loginProcessingUrl("/lll") //LoginForm을 만나면 시큐리티가 낚아챔
                     .defaultSuccessUrl("/cafe",true)// 패스워드 파라미터명 설정
                     .and()
