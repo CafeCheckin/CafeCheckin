@@ -1,5 +1,6 @@
 package com.example.CafeTour.controller;
 
+import com.example.CafeTour.Message;
 import com.example.CafeTour.domain.Board;
 import com.example.CafeTour.domain.User;
 import com.example.CafeTour.service.BoardService;
@@ -31,7 +32,8 @@ public class BoardController {
     public ModelAndView boardList(Board board, Principal principal,ModelAndView mav) {
         User userDto = userService.findByEmail(principal.getName());
         boardService.write(board, userDto);
-        mav.setViewName("redirect:/board");
+        mav.addObject("data", new Message("게시글 작성이 완료되었습니다", "/board"));
+        mav.setViewName("Message");
         return mav;
     }
 
