@@ -1,5 +1,6 @@
 package com.example.CafeTour.controller;
 
+import com.example.CafeTour.Message;
 import com.example.CafeTour.domain.Comment;
 import com.example.CafeTour.domain.User;
 import com.example.CafeTour.service.BoardService;
@@ -26,11 +27,12 @@ public class CommentController {
         return mav;
     }
 
-    @PostMapping("/comment-write")
+    @PostMapping("/comment-write") //게시판 댓글 작성
     public ModelAndView commentWrite(Long boardId, Comment comment,Principal principal,ModelAndView mav){
         User user=userService.findByEmail(principal.getName());
         commentService.write(comment,user,boardService.details(boardId));
-        mav.setViewName("redirect:/board");
+        mav.addObject("data", new Message("댓글이 작성되었습니다.", "/board"));
+        mav.setViewName("Message");
         return mav;
     }
 
@@ -60,13 +62,16 @@ public class CommentController {
     @PostMapping("/update-comment")
     public ModelAndView updateComment(Long commentId,Long boardId,Comment comment,ModelAndView mav){
         commentService.update(commentId,comment);
-        mav.setViewName("redirect:/view/"+boardId);
+        mav.addObject("data", new Message("댓글이 수정되었습니다.", "/view/"+boardId));
+        mav.setViewName("Message");
         return mav;
     }
 
-    @GetMapping("/comment-delete")
+    @GetMapping("/comment-delete") //댓글 삭제
     public ModelAndView commentDelete(Long commentId,ModelAndView mav){
         commentService.deleteById(commentId);
+        mav.addObject("data", new Message("댓글이 삭제되었습니다.", "/view"));
+        mav.setViewName("Message");
         return mav;
     }
 }

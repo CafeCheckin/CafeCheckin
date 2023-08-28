@@ -12,4 +12,5 @@ public interface CafeRepository extends JpaRepository<CafeInformation, Long> {
     List<CafeInformation> findAll();
 
     List<CafeInformation> findByAddressContaining(String name);
+
 }

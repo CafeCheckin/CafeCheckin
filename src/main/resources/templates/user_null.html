@@ -140,29 +140,23 @@
     </ul>
 
     <div class="card">
-        <div class="card-header" >카페 리뷰List</div>
-            <ui class="list-group">
-                <tr th:each="board : ${review}">
-                    <li class="list-group-item d-flex justify-content-between">
-                        <td>
-                            <a style="display:block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 300px" th:utext="${board.reviewText}" th:href="@{/review-detail(reviewId=${board.id},cafeId=${locations.id})}">
-                            </a>
-                        </td>
-                        <span>작성자: <td th:text="${board.user.nickName}"></td></span>
-                        <span>조회수: <td th:text="${board.reviewHit}"></td></span>
-                </tr>
-            </ui>
-        </div>
-
+        <div class="card-header">카페 리뷰List</div>
+        <ui class="list-group">
+            <tr th:each="board : ${review}">
+                <li class="list-group-item d-flex justify-content-between">
+                    <td>
+                        <a th:utext="${board.reviewText}"></a>
+                    </td>
+                    <span>작성자: <td th:text="${board.user.nickName}"></td></span>
+            </tr>
+        </ui>
     </div>
 
-    <div class="form-group">
-        <a class="btn btn-outline-primary" style="float: left;margin-top: 10px" th:href="@{/wish-cafe(cafeId=${locations.id})}" role="button">찜하기</a>
-    </div>
+</div>
 
-    <div class="form-group">
+<div class="form-group">
     <a class="btn btn-outline-primary" style="float: right;margin-top: 10px" th:href="@{/write-review(cafeId=${locations.id})}" role="button">리뷰 등록</a>
-    </div>
+</div>
 
 </div>
 

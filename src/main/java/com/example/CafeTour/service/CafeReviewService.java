@@ -8,7 +8,6 @@ import com.example.CafeTour.repository.CafeReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Service
@@ -48,5 +47,10 @@ public class CafeReviewService {
                 .orElseThrow(()->{
                     return new IllegalArgumentException("리뷰 상세보기 실패");
                 });
+    }
+
+    @Transactional
+    public void updateView(Long reviewId) {
+        cafeReviewRepository.updateView(reviewId);
     }
 }

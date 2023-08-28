@@ -26,7 +26,6 @@ public class CafeReview {
     @Lob
     private String reviewText;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="user_id")
     private User user;

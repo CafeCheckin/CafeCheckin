@@ -13,6 +13,7 @@ import java.util.List;
 public class CafeService {
     private final CafeRepository cafeRepository;
 
+    @Transactional
     public List<CafeInformation> findCafe(String name){
         return cafeRepository.findByAddressContaining(name);
     }
@@ -24,4 +25,5 @@ public class CafeService {
                     return new IllegalArgumentException("존재하지 않는 카페");
                 });
     } //카페 세부사항 조회
+
 }

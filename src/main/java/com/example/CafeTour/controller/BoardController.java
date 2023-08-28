@@ -7,9 +7,7 @@ import com.example.CafeTour.service.BoardService;
 import com.example.CafeTour.service.CommentService;
 import com.example.CafeTour.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -38,10 +36,9 @@ public class BoardController {
     }
 
     @GetMapping("/board")  //게시글 목록
-    public ModelAndView list(ModelAndView mav, @PageableDefault(size = 5,sort = "id",direction = Sort.Direction.DESC)Pageable pageable) {
-        mav.addObject("li", boardService.boardingList(pageable));
-        mav.addObject("previous", pageable.previousOrFirst().getPageNumber());
-        mav.addObject("next", pageable.next().getPageNumber());
+    public ModelAndView list(ModelAndView mav, @RequestParam(value="page", defaultValue="0") int page) {
+        Page<Board> paging=this.boardService.boardingList(page);
+        mav.addObject("paging",paging);
         mav.setViewName("/boards/board_list");
         return mav;
     }
@@ -65,14 +62,16 @@ public class BoardController {
     @GetMapping("/delete-board")
     public ModelAndView deleteBoarding(Long boardId,ModelAndView mav){
         boardService.deleteById(boardId);
-        mav.setViewName("redirect:/board");
+        mav.addObject("data", new Message("게시글이 삭제되었습니다.", "/board"));
+        mav.setViewName("Message");
         return mav;
     }
 
     @PostMapping("/update-board")
     public ModelAndView boardUpdate(Long boardId,Board board,ModelAndView mav) {
         boardService.updateBoard(board,boardId);
-        mav.setViewName("redirect:/board");
+        mav.addObject("data", new Message("게시글이 수정되었습니다.", "/board"));
+        mav.setViewName("Message");
         return mav;
     }
 
