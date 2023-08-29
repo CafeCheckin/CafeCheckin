@@ -93,6 +93,7 @@
     </nav>
 </div>
 
+
 <div class="container">
     <h1 class="justify-content-center" th:text="${locations.cafeName}"></h1>
     <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -101,31 +102,26 @@
             <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
+
         <div class="carousel-inner">
+            <tr th:each="board : ${image}">
             <div class="carousel-item active">
+                <img th:src="@{${board.cafeImageUrl}}" class="d-block w-100" alt="..." />
+            </div>
+            </tr>
+            <div class="carousel-item">
                 <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-                <div class="container">
-
-                </div>
             </div>
             <div class="carousel-item">
                 <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-                <div class="container">
-
-                </div>
-            </div>
-            <div class="carousel-item">
-                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-
-                <div class="container">
-
-                </div>
             </div>
         </div>
+
         <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
+
         <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
@@ -164,6 +160,10 @@
     <a class="btn btn-outline-primary" style="float: right;margin-top: 10px" th:href="@{/write-review(cafeId=${locations.id})}" role="button">리뷰 등록</a>
     </div>
 
+
+<div class="form-group">
+    <a class="btn btn-outline-primary" style="float: right;margin-top: 10px" th:href="@{/insert(cafeId=${locations.id})}" role="button">이미지 등록</a>
+</div>
 </div>
 
 <!-- IONICONS -->

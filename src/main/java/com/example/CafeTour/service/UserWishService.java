@@ -26,4 +26,13 @@ public class UserWishService {
     public List<UserWish> findWishList(Long userId){
         return userWishRepository.findByUserId(userId);
     }
+
+    @Transactional
+    public boolean checkWishList(Long cafeId){
+      return userWishRepository.existsByCafeInformation_Id(cafeId);
+    }
+
+    public void delete(Long wishListId) {
+        userWishRepository.deleteById(wishListId);
+    }
 }

@@ -118,13 +118,10 @@
                             <a th:text="${wish.cafeInformation.cafeName}"></a>
                         </td>
                         <td th:text="${wish.cafeInformation.address}"></td>
+                        <td><a class="btn btn-outline-primary" style="float: right" th:href="@{/delete-wishlist(wishListId=${wish.id})}" role="button">삭제</a></td>
                     </tr>
                     </tbody>
                 </table>
-
-                <div class="form-group">
-                    <a class="btn btn-outline-primary" style="float: right" href="/boarding" role="button">글 등록</a>
-                </div>
             </div>
         </div>
     </form>
