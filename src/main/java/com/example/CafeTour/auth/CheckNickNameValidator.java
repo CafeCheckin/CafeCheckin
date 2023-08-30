@@ -10,6 +10,7 @@ import org.springframework.validation.Errors;
 @RequiredArgsConstructor
 public class CheckNickNameValidator extends AbstractValidator<UserCreateForm> {
     private final UserRepository userRepository;
+
     @Override
     protected void doValidate(UserCreateForm dto, Errors errors) {
         if(userRepository.existsByNickName(dto.getUsername())) {

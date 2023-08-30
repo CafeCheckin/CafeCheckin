@@ -60,14 +60,29 @@ public class UserService implements UserDetailsService{
     }
 
     @Transactional
-    public void updateUser(String username,String password,String email){
-        User persistance=userRepository.findByEmail(email).orElseThrow(()
+    public void updateEmail(String email,Long userId){
+        User persistance=userRepository.findById(userId).orElseThrow(()
+                ->{return new IllegalArgumentException("회원찾기 실패");
+        });
+        persistance.setEmail(email);
+    } //회원 정보 업데이트
+
+    @Transactional
+    public void updateNickName(String username,Long userId){
+        User persistance=userRepository.findById(userId).orElseThrow(()
+                ->{return new IllegalArgumentException("회원찾기 실패");
+        });
+        persistance.setNickName(username);
+    } //회원 정보 업데이트
+
+    @Transactional
+    public void updatePassword(String password,Long userId){
+        User persistance=userRepository.findById(userId).orElseThrow(()
                 ->{return new IllegalArgumentException("회원찾기 실패");
         });
         String rawPassword=password;
         String encPassword=encoder.encode(rawPassword);
         persistance.setPw(encPassword);
-        persistance.setNickName(username);
     } //회원 정보 업데이트
 
     @Transactional

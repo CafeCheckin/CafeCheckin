@@ -1,7 +1,9 @@
 package com.example.CafeTour.controller;
 
+import com.example.CafeTour.Message;
 import com.example.CafeTour.auth.CheckEmailValidator;
 import com.example.CafeTour.auth.CheckNickNameValidator;
+import com.example.CafeTour.auth.CheckPasswordValidator;
 import com.example.CafeTour.domain.User;
 import com.example.CafeTour.domain.UserCreateForm;
 import com.example.CafeTour.service.UserService;
@@ -24,11 +26,13 @@ public class UserController {
     private final UserService userService;
     private final CheckEmailValidator checkEmailValidator;
     private final CheckNickNameValidator checkNickNameValidator;
+    private final CheckPasswordValidator checkPasswordValidator;
+
     @InitBinder
     public void validatorBinder(WebDataBinder binder){
         binder.addValidators(checkEmailValidator);
         binder.addValidators(checkNickNameValidator);
-        //binder.addValidators(checkEmailValidator);
+        binder.addValidators(checkPasswordValidator);
     }
 
     @GetMapping("/signup")
@@ -53,22 +57,38 @@ public class UserController {
         }
         userService.create(userCreateForm.getUsername(),
                 userCreateForm.getEmail(), userCreateForm.getPassword1());
-        mav.setViewName("home");
+        mav.addObject("data", new Message("회원가입이 완료되었습니다.", "/home"));
+        mav.setViewName("Message");
         return mav;
     }
 
     @GetMapping("/user-info-update")
     public ModelAndView userInfo(ModelAndView mav, Principal principal) {
         User userDto = userService.findByEmail(principal.getName());
-        mav.addObject("userinfo2", userDto);
+        UserCreateForm userCreateForm=new UserCreateForm(); //회원정보수정창에 넘겨줄 현재 로그인한 유저의 정보
+        userCreateForm.setEmail(userDto.getEmail());
+        userCreateForm.setUsername(userDto.getNickName());
+        mav.addObject("dto",userCreateForm);
+        mav.addObject("userId",userDto.getId());
         mav.setViewName("/users/user_update_form");
         return mav;
     }
-
     @PostMapping("/user-info-update")
-    public ModelAndView userInfoUpdate(@RequestParam String username, String password1, String email, ModelAndView mav) {
-        userService.updateUser(username, password1, email);
-        mav.setViewName("cafe");
+    public ModelAndView userInfoUpdate(@Valid UserCreateForm userCreateForm, Errors errors, ModelAndView mav) {
+        if (errors.hasErrors()) {
+            mav.addObject("dto",userCreateForm);
+            Map<String, String> validatorResult = userService.validateHandling(errors);
+            for (String key : validatorResult.keySet()) {
+                mav.addObject(key, validatorResult.get(key));
+            }
+            //회원정보수정 페이지로 리턴
+            mav.setViewName("/users/user_update_form");
+            return mav;
+        }
+        //userService.updateNickName(userCreateForm.getUsername());
+
+        mav.addObject("data", new Message("회원정보 수정이 완료되었습니다.", "/cafe"));
+        mav.setViewName("Message");
         return mav;
     }
 
