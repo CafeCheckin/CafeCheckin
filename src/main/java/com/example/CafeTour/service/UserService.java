@@ -2,6 +2,7 @@ package com.example.CafeTour.service;
 
 import com.example.CafeTour.domain.User;
 import com.example.CafeTour.domain.UserRole;
+import com.example.CafeTour.dto.MailDto;
 import com.example.CafeTour.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,7 +25,7 @@ import java.util.*;
 public class UserService implements UserDetailsService{
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
-
+    private final SendMailService sendMailService;
     public User create(String username, String email, String password) {
         User user = new User();
         user.setNickName(username);
@@ -114,4 +115,6 @@ public class UserService implements UserDetailsService{
         }
         return validatorResult;
     }
+
+
 }

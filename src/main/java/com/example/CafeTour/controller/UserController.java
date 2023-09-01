@@ -6,11 +6,12 @@ import com.example.CafeTour.auth.CheckNickNameValidator;
 import com.example.CafeTour.auth.CheckPasswordValidator;
 import com.example.CafeTour.domain.User;
 import com.example.CafeTour.domain.UserCreateForm;
+import com.example.CafeTour.dto.MailDto;
+import com.example.CafeTour.service.SendMailService;
 import com.example.CafeTour.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class UserController {
     private final CheckEmailValidator checkEmailValidator;
     private final CheckNickNameValidator checkNickNameValidator;
     private final CheckPasswordValidator checkPasswordValidator;
-
+    private final SendMailService sendMailService;
     @InitBinder
     public void validatorBinder(WebDataBinder binder){
         binder.addValidators(checkEmailValidator);
@@ -85,8 +86,6 @@ public class UserController {
             mav.setViewName("/users/user_update_form");
             return mav;
         }
-        //userService.updateNickName(userCreateForm.getUsername());
-
         mav.addObject("data", new Message("회원정보 수정이 완료되었습니다.", "/cafe"));
         mav.setViewName("Message");
         return mav;
@@ -123,6 +122,28 @@ public class UserController {
     @GetMapping("/email-check")
     public ResponseEntity<Boolean> emailCheck(@RequestParam(name = "email")String email){
         return ResponseEntity.ok(userService.doubleCheckEmail(email));
+    }
+
+    @GetMapping("/find-password")
+    public ModelAndView findPassword(ModelAndView mav){
+        mav.setViewName("/users/user_find_password");
+        return mav;
+    }
+
+
+    @PostMapping("password-find")
+    public ModelAndView passwordFind(User user,ModelAndView mav) {
+        if(userService.findByEmail(user.getEmail())!=null){ //이매일이 존재한다면
+            System.out.println(user.getPw());
+            mav.setViewName("security");
+            return mav;
+        }
+        else{
+            mav.addObject("data", new Message("존재하지 않는 이메일입니다!", "/find-password"));
+            mav.setViewName("Message");
+            return mav;
+        }
+
     }
 }
 
