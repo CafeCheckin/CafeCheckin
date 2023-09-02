@@ -26,7 +26,7 @@ public class UserWishController {
         User user = userService.findByEmail(principal.getName());
         CafeInformation cafeInformation = cafeService.details(cafeId);
 
-        if(userWishService.checkWishList(cafeId)){
+        if(userWishService.checkWishList(cafeId,user.getId())){
             mav.addObject("data", new Message("이미 찜이 되어있습니다.", "/cafe-info/" + cafeId));
             mav.setViewName("Message");
             return mav;

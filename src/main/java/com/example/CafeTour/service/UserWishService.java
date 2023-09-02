@@ -28,8 +28,8 @@ public class UserWishService {
     }
 
     @Transactional
-    public boolean checkWishList(Long cafeId){
-      return userWishRepository.existsByCafeInformation_Id(cafeId);
+    public boolean checkWishList(Long cafeId,Long userId){
+      return userWishRepository.existsByCafeInformation_IdAndUser_Id(cafeId,userId);
     }
 
     public void delete(Long wishListId) {

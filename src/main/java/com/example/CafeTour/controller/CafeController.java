@@ -16,7 +16,7 @@ public class CafeController {
     private final CafeService cafeService;
     private final CafeReviewService cafeReviewService;
     private final CafeImageService cafeImageService;
-    /*@GetMapping("/SeoulCafe")
+   /* @GetMapping("/SeoulCafe")
     public ModelAndView gangNam(HttpServletRequest httpServletRequest, ModelAndView){
         String name=httpServletRequest.getParameter("seoul");
         System.out.println(name);
@@ -28,6 +28,7 @@ public class CafeController {
     @GetMapping("/seoul-cafe")
     public ModelAndView gangNam(HttpServletRequest httpServletRequest, ModelAndView mav) {
         String name = httpServletRequest.getParameter("seoul");
+        String mood=httpServletRequest.getParameter("mood");
         mav.addObject("location", cafeService.findCafe(name));
         mav.setViewName("/SeoulCafe/" + name);
         return mav;

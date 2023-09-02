@@ -129,13 +129,15 @@
                     <option value="JungNang">중랑구</option>
                 </select> <!--!>지역구 선택<-->
             </div>
+
             <div class="mood">
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select" name="mood" aria-label="Default select example" >
                     <option selected>카페분위기</option>
                     <option value="조용한">조용한</option>
                     <option value="애견카페">애견카페</option>
                 </select>
             </div>
+
             <input type="submit" class="btn btn-outline-secondary"  style="margin-left: 40px;"  value="검색하기">
         </form>
     </div>
@@ -147,7 +149,8 @@
 <div class="map-frame">
     <div id="map" style="height:600px"></div>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=99bc8b99d1db80a6977426d3c400fc14"></script>
-    <script>
+
+    <script th:lnline="javascript">
         var container = document.getElementById('map');
         var options = {
             center: new kakao.maps.LatLng(37.5175066,127.0473753),
@@ -159,10 +162,14 @@
         var mapTypeControl = new kakao.maps.MapTypeControl();
 
         // 마커를 표시할 위치와 title 객체 배열입니다
+        <![CDATA[
         var positions = [
             {
-                title: '스타벅스 강동점',
-                latlng: new kakao.maps.LatLng(37.5360487, 127.1330387)
+                let: name=[[${location.cafeName}]],
+                let: lat=[[${location.latitude}]],
+                let: long=[[${location.longitude}]],
+                title: name,
+                latlng: new kakao.maps.LatLng(lat, long)
             },
             {
                 title: '하모니호텔',
@@ -173,6 +180,7 @@
                 latlng: new kakao.maps.LatLng(37.5365407,127.1349344)
             }
         ];
+        ]]>
 
         // 마커 이미지의 이미지 주소입니다
         var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
@@ -192,6 +200,34 @@
                 title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
                 image : markerImage // 마커 이미지
             });
+        }
+
+        var 데이터 = [
+            [36.511513, 127.258927, '<div style="padding:5px;" >텅<br><a href="/cafe-info/1" style="color:blue" target="_blank">상세보기</a></div>'],
+            [36.514494, 127.254835, '<div style="padding:5px;">늘봄 초등학교</div>'],
+            [36.511590, 127.262530, '<div style="padding:5px;">도담 초등학교</div>'],
+        ];
+
+        for (var i = 0; i < 데이터.length; i++ ) {
+// 지도에 마커를 생성하고 표시한다.
+            var marker = new kakao.maps.Marker({
+                position: new kakao.maps.LatLng(데이터[i][0], 데이터[i][1]), // 마커의 좌표
+                map: map, // 마커를 표시할 지도 객체
+            });
+
+            iwPosition = new kakao.maps.LatLng(데이터[i][0], 데이터[i][1]),
+                iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+// 인포윈도우를 생성하고 지도에 표시합니다
+            var infowindow = new kakao.maps.InfoWindow({
+                map: map, // 인포윈도우가 표시될 지도
+                position : iwPosition,
+                content : 데이터[i][2],
+                removable : iwRemoveable
+            });
+
+// 마커 위에 인포윈도우를 표시
+            infowindow.open(map, marker);
         }
     </script>
 </div>

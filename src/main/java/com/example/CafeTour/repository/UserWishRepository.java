@@ -9,5 +9,5 @@ import java.util.List;
 public interface UserWishRepository extends JpaRepository<UserWish,Long> {
     List<UserWish> findByUserId(Long userId);
 
-    boolean existsByCafeInformation_Id(Long cafeId);
+    boolean existsByCafeInformation_IdAndUser_Id(Long cafeId,Long userId);
 }

@@ -13,9 +13,7 @@ public class MailConfig {
     public JavaMailSender javaMailService() {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 
-        javaMailSender.setHost("smtp.naver.com");
-        javaMailSender.setUsername("이메일 주소");
-        javaMailSender.setPassword("비번");
+        javaMailSender.setHost("smtp.gmail.com");
 
         javaMailSender.setPort(465);
 
@@ -30,7 +28,7 @@ public class MailConfig {
         properties.setProperty("mail.smtp.auth", "true");
         properties.setProperty("mail.smtp.starttls.enable", "true");
         properties.setProperty("mail.debug", "true");
-        properties.setProperty("mail.smtp.ssl.trust","smtp.naver.com");
+        properties.setProperty("mail.smtp.ssl.trust","smtp.gmail.com");
         properties.setProperty("mail.smtp.ssl.enable","true");
         return properties;
     }

@@ -11,12 +11,13 @@ import com.example.CafeTour.service.SendMailService;
 import com.example.CafeTour.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Map;
@@ -29,6 +30,7 @@ public class UserController {
     private final CheckNickNameValidator checkNickNameValidator;
     private final CheckPasswordValidator checkPasswordValidator;
     private final SendMailService sendMailService;
+    private final PasswordEncoder encoder;
     @InitBinder
     public void validatorBinder(WebDataBinder binder){
         binder.addValidators(checkEmailValidator);
@@ -130,20 +132,23 @@ public class UserController {
         return mav;
     }
 
-
     @PostMapping("password-find")
-    public ModelAndView passwordFind(User user,ModelAndView mav) {
-        if(userService.findByEmail(user.getEmail())!=null){ //이매일이 존재한다면
-            System.out.println(user.getPw());
-            mav.setViewName("security");
-            return mav;
+    public ModelAndView passwordFind(User user,ModelAndView mav) throws MessagingException {
+        System.out.println("받아온 이메일"+user.getEmail());
+
+        if(userService.findByEmail(user.getEmail())!=null){
+            User userdto=userService.findByEmail(user.getEmail());
+            MailDto dto = sendMailService.createMailAndChangePassword(userdto.getEmail(), userdto.getNickName());
+            sendMailService.mailSend(dto);
+            mav.addObject("data", new Message("입력하신 이메일로 임시 비밀번호가 전송되었습니다", "/home"));
+            mav.setViewName("Message");
         }
         else{
-            mav.addObject("data", new Message("존재하지 않는 이메일입니다!", "/find-password"));
+            mav.addObject("data", new Message("존재하지 않은 이메일입니다!", "/find-password"));
             mav.setViewName("Message");
             return mav;
         }
-
+        return mav;
     }
 }
 
