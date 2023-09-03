@@ -73,6 +73,32 @@
             white-space: nowrap;
             -webkit-overflow-scrolling: touch;
         }
+        .star-ratings {
+            color: #aaa9a9;
+            position: relative;
+            unicode-bidi: bidi-override;
+            width: max-content;
+            -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+            -webkit-text-stroke-width: 1.3px;
+            -webkit-text-stroke-color: #2b2a29;
+        }
+
+        .star-ratings-fill {
+            color: #fff58c;
+            padding: 0;
+            position: absolute;
+            z-index: 1;
+            display: flex;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            -webkit-text-fill-color: gold;
+        }
+
+        .star-ratings-base {
+            z-index: 0;
+            padding: 0;
+        }
     </style>
 </head>
 <body id="body-pd">
@@ -133,6 +159,7 @@
         <li>오픈시간 : <span th:text="${locations.openAt}"></span></li>
         <li>마감시간 : <span th:text="${locations.closeAt}"></span></li>
         <li>Tel : <span th:text="${locations.telNum}"></span></li>
+        <li>카페 평점 : <span th:text="${locations.cafeGrade}"></span></li>
     </ul>
 
     <div class="card">
@@ -146,7 +173,16 @@
                         </td>
                         <span>작성자: <td th:text="${board.user.nickName}"></td></span>
                         <span>조회수: <td th:text="${board.reviewHit}"></td></span>
-                        <span>평점: <td th:text="${board.grade}"></td></span>
+                        평점: <div class="star-ratings">
+                        <div class="star-ratings-fill space-x-2 text-lg" th:with="count=${board.grade}">
+                <span th:each="star : ${#numbers.sequence(1,count)}">
+                    <span>★</span>
+                </span>
+                </div>
+                <div class="star-ratings-base space-x-2 text-lg">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                    </div>
                 </tr>
             </ui>
         </div>

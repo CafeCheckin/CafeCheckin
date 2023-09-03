@@ -38,7 +38,7 @@ public class CafeInformation {
 
         @Column(name="longitude")
         private String longitude;
-/*
-        @Column(name = "cafe_grade")
-        private double cafeGrade;*/
+
+        @Column(name = "cafe_grade", columnDefinition = "double default 0.0",nullable = false)
+        private Double cafeGrade;
 }

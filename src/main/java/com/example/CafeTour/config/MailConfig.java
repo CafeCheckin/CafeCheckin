@@ -14,6 +14,8 @@ public class MailConfig {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 
         javaMailSender.setHost("smtp.gmail.com");
+        javaMailSender.setUsername("seoulcafecheckin@gmail.com");
+
 
         javaMailSender.setPort(465);
 

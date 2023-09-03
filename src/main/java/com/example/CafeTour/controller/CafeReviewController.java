@@ -31,6 +31,7 @@ public class CafeReviewController {
     public ModelAndView reviewList(Long cafeId,CafeReview cafeReview, Principal principal,ModelAndView mav) {
         User userDto = userService.findByEmail(principal.getName());
         cafeReviewService.write(cafeReview, userDto,cafeService.details(cafeId));
+        cafeService.updateGrade(cafeReview.getGrade(),cafeId,cafeReviewService.reviewList(cafeId).size());
         mav.addObject("data", new Message("리뷰 작성이 완료되었습니다", "/cafe-info/"+cafeId));
         mav.setViewName("Message");
         return mav;

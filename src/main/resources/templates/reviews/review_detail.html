@@ -93,21 +93,6 @@
         }
     </style>
 
-    <script>
-        export default {
-            data() {
-                return {
-                    isActive: false
-                }
-            },
-            methods: {
-                ratingToPercent() {
-                    const score = +this.grade * 20;
-                    return score + 1.5;
-                }
-            }
-        }
-    </script>
 </head>
 <body id="body-pd">
 
@@ -120,14 +105,17 @@
             리뷰 번호 : <span id="id" typeof=""><i th:text="${reviewdetail.id}"></i></span>
             작성자 : <span th:text="${reviewdetail.user.nickName}"></span>
             작성일 : <span th:text="${reviewdetail.createDate}"></span>
-            수정일 : <span th:text="${reviewdetail.modifyDate}"></span>
-            평점 : <div class="star-ratings">
-            <div class="star-ratings-fill space-x-2 text-lg"  :style="{ width: ratingToPercent + '%' }">
-                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            수정일 : <span th:text="${reviewdetail.modifyDate}"></span><br>
+            <평점></평점> <div class="star-ratings">
+            <div class="star-ratings-fill space-x-2 text-lg" th:with="count=${reviewdetail.grade}">
+                <tr th:each="star : ${#numbers.sequence(1,count)}">
+                <span>★</span>
+                </tr>
             </div>
             <div class="star-ratings-base space-x-2 text-lg">
                 <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
             </div>
+
         </div>
         </div>
 
