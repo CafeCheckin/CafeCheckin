@@ -110,14 +110,16 @@
                     <tr>
                         <th>카페명</th>
                         <th>주소</th>
+                        <th>분위기</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="wish : ${wishcafe}">
                         <td>
-                            <a th:text="${wish.cafeInformation.cafeName}"></a>
+                            <a th:text="${wish.cafeInformation.cafeName}" th:href="@{/cafe-info/{cafeId}(cafeId=${wish.cafeInformation.id})}"></a>
                         </td>
                         <td th:text="${wish.cafeInformation.address}"></td>
+                        <td th:text="${wish.cafeInformation.cafeMood}"></td>
                         <td><a class="btn btn-outline-primary" style="float: right" th:href="@{/delete-wishlist(wishListId=${wish.id})}" role="button">삭제</a></td>
                     </tr>
                     </tbody>

@@ -12,6 +12,8 @@ import java.security.Principal;
 public class HomeController {
     @RequestMapping("/home")
     public ModelAndView h1(ModelAndView mav) {
+        String url="C:\\Users\\이준석\\OneDrive\\문서\\카카오톡 받은 파일\\카페체크인.png";
+        mav.addObject("image",url);
         mav.setViewName("home");
         return mav;
     }

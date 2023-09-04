@@ -35,7 +35,7 @@ public class CafeReview {
     @JoinColumn(name ="cafe_information_id")
     private CafeInformation cafeInformation;
 
-    @Column(name = "grade")
+    @Column(name = "grade", columnDefinition = "integer default 2",nullable = false)
     private int grade;
 
     @Column(name = "review_hit")

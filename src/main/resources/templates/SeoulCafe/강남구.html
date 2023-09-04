@@ -150,27 +150,21 @@
     <div id="map" style="height:600px"></div>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=99bc8b99d1db80a6977426d3c400fc14"></script>
 
-    <script th:lnline="javascript">
+    <script>
         var container = document.getElementById('map');
         var options = {
             center: new kakao.maps.LatLng(37.5175066,127.0473753),
             level: 4
         };
 
+
+
         var map = new kakao.maps.Map(container, options);
 
         var mapTypeControl = new kakao.maps.MapTypeControl();
 
         // 마커를 표시할 위치와 title 객체 배열입니다
-        <![CDATA[
         var positions = [
-            {
-                let: name=[[${location.cafeName}]],
-                let: lat=[[${location.latitude}]],
-                let: long=[[${location.longitude}]],
-                title: name,
-                latlng: new kakao.maps.LatLng(lat, long)
-            },
             {
                 title: '하모니호텔',
                 latlng: new kakao.maps.LatLng(37.5389063,127.1382273)
@@ -180,7 +174,6 @@
                 latlng: new kakao.maps.LatLng(37.5365407,127.1349344)
             }
         ];
-        ]]>
 
         // 마커 이미지의 이미지 주소입니다
         var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
