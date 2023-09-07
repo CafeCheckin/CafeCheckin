@@ -162,7 +162,16 @@
         <li>오픈시간 : <span th:text="${locations.openAt}"></span></li>
         <li>마감시간 : <span th:text="${locations.closeAt}"></span></li>
         <li>Tel : <span th:text="${locations.telNum}"></span></li>
-        <li>카페 평점 : <span th:text="${locations.cafeGrade}"></span></li>
+        <li>카페 평점 : <span th:text="${locations.cafeGrade}"></span><div class="star-ratings">
+            <div class="star-ratings-fill space-x-2 text-lg" th:with="count=${locations.cafeGrade}">
+                <span th:each="star : ${#numbers.sequence(1,count)}">
+                    <span>★</span>
+                </span>
+            </div>
+            <div class="star-ratings-base space-x-2 text-lg">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+        </div></li>
     </ul>
 
     <div class="card">

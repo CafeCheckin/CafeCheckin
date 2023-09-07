@@ -1,10 +1,8 @@
 package com.example.CafeTour.controller;
 
 import com.example.CafeTour.Message;
-import com.example.CafeTour.domain.CafeImage;
 import com.example.CafeTour.service.CafeImageService;
 import com.example.CafeTour.service.CafeService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
