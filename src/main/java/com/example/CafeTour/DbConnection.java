@@ -4,7 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DbConnection {
-
+        static {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         public void testConnection() {
             try (Connection con =
