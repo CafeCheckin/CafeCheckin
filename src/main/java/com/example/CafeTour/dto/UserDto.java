@@ -25,6 +25,4 @@ public class UserDto {
         this.email = email;
         this.nickName = nickName;
     }
-
-
 }

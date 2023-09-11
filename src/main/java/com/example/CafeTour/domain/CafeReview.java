@@ -1,9 +1,8 @@
 package com.example.CafeTour.domain;
 
+import com.example.CafeTour.dto.CafeReviewUpdateRequestDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -17,6 +16,7 @@ import java.sql.Timestamp;
 @Table(name = "cafe_review")
 @Getter
 @Setter
+@NoArgsConstructor
 public class CafeReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,4 +48,19 @@ public class CafeReview {
     @Column(name = "modify_dt")
     @UpdateTimestamp
     private Timestamp modifyDate;
+
+    @Builder
+    public CafeReview(Long id, String reviewText, User user, CafeInformation cafeInformation, int grade) {
+        this.id = id;
+        this.reviewText = reviewText;
+        this.user = user;
+        this.cafeInformation = cafeInformation;
+        this.grade = grade;
+        this.reviewHit = 0;
+    }
+
+    public void update(CafeReviewUpdateRequestDto requestDto){
+        this.reviewText=requestDto.getReviewText();
+        this.grade=requestDto.getGrade();
+    }
 }

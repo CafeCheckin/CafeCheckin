@@ -1,6 +1,7 @@
 package com.example.CafeTour.service;
 
 import com.example.CafeTour.domain.CafeInformation;
+import com.example.CafeTour.dto.CafeResponseDto;
 import com.example.CafeTour.repository.CafeRepository;
 import com.example.CafeTour.repository.CafeReviewRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,11 +23,9 @@ public class CafeService {
     }
 
     @Transactional(readOnly = true)
-    public CafeInformation details(Long id) {
-        return cafeRepository.findById(id)
-                .orElseThrow(() -> {
-                    return new IllegalArgumentException("존재하지 않는 카페");
-                });
+    public CafeResponseDto details(Long id) {
+       CafeInformation cafeInformation=cafeRepository.findById(id).orElseThrow(()->new IllegalArgumentException("존재하지 않은 카페"));
+       return new CafeResponseDto(cafeInformation);
     } //카페 세부사항 조회
 
     @Transactional

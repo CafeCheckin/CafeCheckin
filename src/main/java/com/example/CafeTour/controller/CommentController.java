@@ -30,7 +30,7 @@ public class CommentController {
     @PostMapping("/comment-write") //게시판 댓글 작성
     public ModelAndView commentWrite(Long boardId, Comment comment,Principal principal,ModelAndView mav){
         User user=userService.findByEmail(principal.getName());
-        commentService.write(comment,user,boardService.details(boardId));
+       // commentService.write(comment,user,boardService.details(boardId));
         mav.addObject("data", new Message("댓글이 작성되었습니다.", "/board"));
         mav.setViewName("Message");
         return mav;

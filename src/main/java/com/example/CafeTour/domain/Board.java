@@ -1,6 +1,9 @@
 package com.example.CafeTour.domain;
 
+import com.example.CafeTour.dto.BoardUpdateRequestDto;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -11,7 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "boarding")
 @Getter
-@Setter
+@NoArgsConstructor
 public class Board {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
@@ -40,4 +43,21 @@ public class Board {
     @Column(name = "modify_date")
     @UpdateTimestamp
     private Timestamp modifyDate;
+
+    @Builder
+    public Board(Long id,User user,String boardOpinion,int clicks,String title,Timestamp createDate,Timestamp modifyDate){
+        this.id=id;
+        this.user=user;
+        this.boardOpinion=boardOpinion;
+        this.clicks=clicks;
+        this.title=title;
+        this.createDate=createDate;
+        this.modifyDate=modifyDate;
+    }
+
+    public void update(BoardUpdateRequestDto requestDto){
+        this.title=requestDto.getTitle();
+        this.boardOpinion= requestDto.getBoardOpinion();
+        this.modifyDate=requestDto.getModifyDate();
+    }
 }

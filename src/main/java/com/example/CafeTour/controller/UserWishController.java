@@ -24,7 +24,7 @@ public class UserWishController {
     @GetMapping("/wish-cafe") //카페 찜하기
     public ModelAndView wishCafe(Long cafeId, Principal principal, UserWish userWish, ModelAndView mav) {
         User user = userService.findByEmail(principal.getName());
-        CafeInformation cafeInformation = cafeService.details(cafeId);
+        //CafeInformation cafeInformation = cafeService.details(cafeId);
 
         if(userWishService.checkWishList(cafeId,user.getId())){
             mav.addObject("data", new Message("이미 찜이 되어있습니다.", "/cafe-info/" + cafeId));
@@ -32,7 +32,7 @@ public class UserWishController {
             return mav;
         }
         else{
-            userWishService.register(user, cafeInformation, userWish);
+           // userWishService.register(user, cafeInformation, userWish);
             mav.addObject("data", new Message("찜하기가 완료되었습니다.", "/cafe-info/" + cafeId));
             mav.setViewName("Message");
             return mav;

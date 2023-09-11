@@ -24,7 +24,7 @@ public class CafeImageController {
 
     @PostMapping("/image-upload")
     public ModelAndView imageUpload(@RequestParam("cafeImageUrl")String cafeImageUrl,Long cafeId,ModelAndView mav) {
-        cafeImageService.upload(cafeImageUrl,cafeService.details(cafeId));
+       // cafeImageService.upload(cafeImageUrl,cafeService.details(cafeId));
         mav.addObject("data", new Message("이미지 등록 성공!", "/cafe-info/"+cafeId));
         mav.setViewName("Message");
         return mav;
