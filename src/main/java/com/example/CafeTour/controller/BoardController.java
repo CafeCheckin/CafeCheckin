@@ -3,6 +3,7 @@ package com.example.CafeTour.controller;
 import com.example.CafeTour.Message;
 import com.example.CafeTour.domain.Board;
 import com.example.CafeTour.domain.User;
+import com.example.CafeTour.dto.BoardWriteDto;
 import com.example.CafeTour.service.BoardService;
 import com.example.CafeTour.service.CommentService;
 import com.example.CafeTour.service.UserService;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.security.Principal;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
@@ -21,9 +22,8 @@ public class BoardController {
     private final CommentService commentService;
 
     @GetMapping("/boarding") //글 작성
-    public ModelAndView boardMain(ModelAndView mav) {
-        mav.setViewName("/boards/boarding");
-        return mav;
+    public BoardWriteDto boardMain(@RequestParam("title")String title) {
+        return new BoardWriteDto();
     }
 
     @PostMapping("/write-board") //작성한 게시글 저장
