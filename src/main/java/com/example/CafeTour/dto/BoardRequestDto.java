@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 public class BoardRequestDto {
     private String title;
     private String boardOpinion;
+
    public Board toEntity(User user){
        return Board.builder()
                .user(user)

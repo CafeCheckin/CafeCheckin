@@ -28,7 +28,7 @@ public class SpringConfig{
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
+        http.httpBasic().and()
                 .csrf().disable().cors().disable()
                 .authorizeRequests()
                 .antMatchers("/lll").authenticated()

@@ -11,12 +11,7 @@ import java.sql.Timestamp;
 @Getter
 @NoArgsConstructor
 public class CommentRequestDto {
-    private Long id;
     private String commentText;
-    private Board board;
-    private User user;
-    private Timestamp createDate;
-    private Timestamp modifyDate;
 
     public Comment toEntity(User user,Board board){
         return Comment.builder()

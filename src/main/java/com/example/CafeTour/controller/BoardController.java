@@ -42,7 +42,7 @@ public class BoardController {
         return boardService.details(boardId);
     }
 
-    @DeleteMapping("/board/{boardId}")
+    @DeleteMapping("/board/{boardId}") //게시글 삭제
     public String deleteBoarding(@PathVariable Long boardId){
         boardService.deleteById(boardId);
         return "삭제 완료";
