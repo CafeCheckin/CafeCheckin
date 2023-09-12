@@ -13,7 +13,6 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Getter
-
 public class BoardResponseDto {
     private Long id;
     private String userNickName;

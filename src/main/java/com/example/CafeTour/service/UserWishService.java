@@ -3,6 +3,10 @@ package com.example.CafeTour.service;
 import com.example.CafeTour.domain.CafeInformation;
 import com.example.CafeTour.domain.User;
 import com.example.CafeTour.domain.UserWish;
+import com.example.CafeTour.dto.UserWishRequestDto;
+import com.example.CafeTour.dto.UserWishResponseDto;
+import com.example.CafeTour.repository.CafeRepository;
+import com.example.CafeTour.repository.UserRepository;
 import com.example.CafeTour.repository.UserWishRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,17 +18,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserWishService {
     private final UserWishRepository userWishRepository;
-
+    private final UserRepository userRepository;
+    private final CafeRepository cafeRepository;
     @Transactional
-    public void register(User user, CafeInformation cafeInformation, UserWish userWish) {
-        userWish.setUser(user);
-        userWish.setCafeInformation(cafeInformation);
-        userWishRepository.save(userWish);
+    public Long register(Long cafeId, String email, UserWishRequestDto requestDto) {
+        User user=userRepository.findByEmail(email).orElseThrow(()
+                ->new IllegalArgumentException("존재하지 않는 사용자"));
+        CafeInformation cafeInformation=cafeRepository.findById(cafeId).orElseThrow(()
+                ->new IllegalArgumentException("존재하지 않는 카페"));
+        return userWishRepository.save(requestDto.toEntity(user,cafeInformation)).getId();
     }
 
     @Transactional
-    public List<UserWish> findWishList(Long userId){
-        return userWishRepository.findByUserId(userId);
+    public void findWishList(String email,UserWishResponseDto responseDto){
+        User user=userRepository.findByEmail(email).orElseThrow(()
+                ->new IllegalArgumentException("존재하지 않는 사용자"));
+
     }
 
     @Transactional

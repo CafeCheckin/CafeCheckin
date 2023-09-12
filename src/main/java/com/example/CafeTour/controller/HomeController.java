@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class HomeController {
     @RequestMapping("/home")

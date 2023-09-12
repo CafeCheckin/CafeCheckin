@@ -17,11 +17,6 @@ public class CafeService {
     private final CafeRepository cafeRepository;
     private final CafeReviewRepository cafeReviewRepository;
 
-    @Transactional
-    public List<CafeInformation> findCafe(String name) {
-        return cafeRepository.findByAddressContaining(name);
-    }
-
     @Transactional(readOnly = true)
     public CafeResponseDto details(Long id) {
        CafeInformation cafeInformation=cafeRepository.findById(id).orElseThrow(()->new IllegalArgumentException("존재하지 않은 카페"));

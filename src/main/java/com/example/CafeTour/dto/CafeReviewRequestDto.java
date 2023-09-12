@@ -22,6 +22,7 @@ public class CafeReviewRequestDto {
         return CafeReview.builder()
                 .user(user)
                 .cafeInformation(cafeInformation)
+                .reviewText(reviewText)
                 .grade(grade)
                 .build();
     }

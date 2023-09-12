@@ -13,7 +13,6 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Getter
-
 public class CafeReviewResponseDto {
     private Long id;
     private String reviewText;

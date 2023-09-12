@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.security.Principal;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class CafeReviewController {
     private final UserService userService;

@@ -26,12 +26,12 @@ public class CafeReview {
     @Lob
     private String reviewText;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name ="user_id")
     private User user;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name ="cafe_information_id")
     private CafeInformation cafeInformation;
 

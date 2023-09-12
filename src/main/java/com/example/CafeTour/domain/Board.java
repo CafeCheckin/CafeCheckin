@@ -1,6 +1,7 @@
 package com.example.CafeTour.domain;
 
 import com.example.CafeTour.dto.BoardUpdateRequestDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,10 +21,12 @@ public class Board {
     @Column(name = "Id")
     private Long id;
 
+    @JsonIgnore
     @JoinColumn(name ="user_id")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "board") //mappedBy는 연관관계의주인X, FK가 아니니 컬럼생성X
     private List<Comment> reply;
 

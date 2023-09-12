@@ -1,6 +1,8 @@
 package com.example.CafeTour.domain;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -10,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "user_wish")
 @Getter
 @Setter
+@NoArgsConstructor
 public class UserWish {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +26,11 @@ public class UserWish {
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name ="cafe_id")
         private CafeInformation cafeInformation;
+
+        @Builder
+        public UserWish(Long id, User user, CafeInformation cafeInformation) {
+                this.id = id;
+                this.user = user;
+                this.cafeInformation = cafeInformation;
+        }
 }

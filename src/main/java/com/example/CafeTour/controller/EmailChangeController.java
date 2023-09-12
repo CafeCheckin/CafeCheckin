@@ -12,12 +12,13 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class EmailChangeController {
     private final CheckEmailValidator checkEmailValidator;

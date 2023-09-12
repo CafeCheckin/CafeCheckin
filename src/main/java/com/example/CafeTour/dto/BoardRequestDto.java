@@ -12,24 +12,13 @@ import java.sql.Timestamp;
 @Setter
 @NoArgsConstructor
 public class BoardRequestDto {
-    private Long id;
-    private String userNickName;
-    private int clicks;
     private String title;
     private String boardOpinion;
-    private Timestamp createDate;
-    private Timestamp modifyDate;
-    private User user;
-
    public Board toEntity(User user){
        return Board.builder()
-               .id(id)
                .user(user)
-               .clicks(clicks)
                .title(title)
                .boardOpinion(boardOpinion)
-               .createDate(createDate)
-               .modifyDate(modifyDate)
                .build();
    }
 }

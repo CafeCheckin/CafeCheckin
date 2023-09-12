@@ -23,7 +23,7 @@ import java.security.Principal;
 import java.util.Map;
 
 @RequiredArgsConstructor
-@Controller
+@RestController
 public class UserController {
     private final UserService userService;
     private final CheckEmailValidator checkEmailValidator;

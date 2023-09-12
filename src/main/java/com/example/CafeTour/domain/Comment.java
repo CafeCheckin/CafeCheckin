@@ -1,6 +1,9 @@
 package com.example.CafeTour.domain;
 
+import com.example.CafeTour.dto.CommentUpdateRequestDto;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -14,6 +17,7 @@ import java.sql.Timestamp;
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
+@NoArgsConstructor
 public class Comment { //댓글 구현
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -37,4 +41,18 @@ public class Comment { //댓글 구현
     @Column(name = "modify_dt")
     @UpdateTimestamp
     private Timestamp modifyDate;
+
+    @Builder
+    public Comment(Long id, String commentText, Board board, User user, Timestamp createDate, Timestamp modifyDate) {
+        this.id = id;
+        this.commentText = commentText;
+        this.board = board;
+        this.user = user;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
+    }
+
+    public void update(CommentUpdateRequestDto requestDto){
+        this.commentText=requestDto.getCommentText();
+    }
 }
