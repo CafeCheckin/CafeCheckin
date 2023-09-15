@@ -15,8 +15,6 @@ public class BoardWriteDto {
     private int clicks;
     private String title;
     private String boardOpinion;
-    private Timestamp createDAte;
-    private Timestamp modifyDate;
     private User user;
 
     @Builder
@@ -26,8 +24,6 @@ public class BoardWriteDto {
         this.clicks=board.getClicks();
         this.title=board.getTitle();
         this.boardOpinion=board.getBoardOpinion();
-        this.createDAte=board.getCreateDate();
-        this.modifyDate=board.getModifyDate();
         this.user=board.getUser();
     }
 }

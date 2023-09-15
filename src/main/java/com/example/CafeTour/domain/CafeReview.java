@@ -17,7 +17,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CafeReview {
+public class CafeReview extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
@@ -40,14 +40,6 @@ public class CafeReview {
 
     @Column(name = "review_hit")
     private int reviewHit;
-
-    @Column(name = "create_dt")
-    @CreationTimestamp
-    private Timestamp createDate;
-
-    @Column(name = "modify_dt")
-    @UpdateTimestamp
-    private Timestamp modifyDate;
 
     @Builder
     public CafeReview(Long id, String reviewText, User user, CafeInformation cafeInformation, int grade) {

@@ -15,13 +15,11 @@ import java.sql.Timestamp;
 public class BoardUpdateRequestDto {
     private String title;
     private String boardOpinion;
-    private Timestamp modifyDate;
 
     public Board toEntity(){
         return Board.builder()
                 .title(title)
                 .boardOpinion(boardOpinion)
-                .modifyDate(modifyDate)
                 .build();
     }
 }

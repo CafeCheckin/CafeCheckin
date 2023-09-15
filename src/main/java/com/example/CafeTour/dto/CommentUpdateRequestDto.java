@@ -15,8 +15,6 @@ public class CommentUpdateRequestDto {
     private String commentText;
     private Board board;
     private User user;
-    private Timestamp createDate;
-    private Timestamp modifyDate;
 
     public Comment toEntity(){
         return Comment.builder()

@@ -19,8 +19,6 @@ public class BoardResponseDto {
     private int clicks;
     private String title;
     private String boardOpinion;
-    private Timestamp createDAte;
-    private Timestamp modifyDate;
     private User user;
     private List<CommentReponseDto> comments;
     @Builder
@@ -30,8 +28,6 @@ public class BoardResponseDto {
         this.clicks=board.getClicks();
         this.title=board.getTitle();
         this.boardOpinion=board.getBoardOpinion();
-        this.createDAte=board.getCreateDate();
-        this.modifyDate=board.getModifyDate();
         this.user=board.getUser();
         this.comments=comments;
     }
@@ -47,8 +43,6 @@ public class BoardResponseDto {
             this.id = comment.getId();
             this.commentText=comment.getCommentText();
             this.user= comment.getUser();
-            this.createDate=comment.getCreateDate();
-            this.modifyDate=comment.getModifyDate();
         }
     }
 }

@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Comment { //댓글 구현
+public class Comment extends BaseTimeEntity{ //댓글 구현
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
@@ -34,22 +34,13 @@ public class Comment { //댓글 구현
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "create_dt")
-    @CreationTimestamp
-    private Timestamp createDate;
-
-    @Column(name = "modify_dt")
-    @UpdateTimestamp
-    private Timestamp modifyDate;
 
     @Builder
-    public Comment(Long id, String commentText, Board board, User user, Timestamp createDate, Timestamp modifyDate) {
+    public Comment(Long id, String commentText, Board board, User user) {
         this.id = id;
         this.commentText = commentText;
         this.board = board;
         this.user = user;
-        this.createDate = createDate;
-        this.modifyDate = modifyDate;
     }
 
     public void update(CommentUpdateRequestDto requestDto){

@@ -14,8 +14,6 @@ public class CommentResponseDto {
     private String commentText;
     private Board board;
     private User user;
-    private Timestamp createDate;
-    private Timestamp modifyDate;
 
     @Builder
     public CommentResponseDto(Comment comment) {

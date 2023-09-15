@@ -16,7 +16,7 @@ import java.util.List;
 @Table(name = "boarding")
 @Getter
 @NoArgsConstructor
-public class Board {
+public class Board extends BaseTimeEntity{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Long id;
@@ -39,28 +39,17 @@ public class Board {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "create_date")
-    @CreationTimestamp
-    private Timestamp createDate;
-
-    @Column(name = "modify_date")
-    @UpdateTimestamp
-    private Timestamp modifyDate;
-
     @Builder
-    public Board(Long id,User user,String boardOpinion,int clicks,String title,Timestamp createDate,Timestamp modifyDate){
+    public Board(Long id,User user,String boardOpinion,int clicks,String title){
         this.id=id;
         this.user=user;
         this.boardOpinion=boardOpinion;
         this.clicks=clicks;
         this.title=title;
-        this.createDate=createDate;
-        this.modifyDate=modifyDate;
     }
 
     public void update(BoardUpdateRequestDto requestDto){
         this.title=requestDto.getTitle();
         this.boardOpinion= requestDto.getBoardOpinion();
-        this.modifyDate=requestDto.getModifyDate();
     }
 }

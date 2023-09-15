@@ -20,8 +20,6 @@ public class CafeReviewResponseDto {
     private CafeInformation cafeInformation;
     private int grade;
     private int reviewHit;
-    private Timestamp createDate;
-    private Timestamp modifyDate;
 
     @Builder
     public CafeReviewResponseDto(CafeReview cafeReview) {
@@ -31,7 +29,5 @@ public class CafeReviewResponseDto {
         this.cafeInformation=cafeReview.getCafeInformation();
         this.grade=cafeReview.getGrade();
         this.reviewHit= cafeReview.getReviewHit();
-        this.createDate=cafeReview.getCreateDate();
-        this.modifyDate=cafeReview.getModifyDate();
     }
 }
