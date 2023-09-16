@@ -26,12 +26,12 @@ public class CafeReview extends BaseTimeEntity{
     @Lob
     private String reviewText;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="user_id")
     private User user;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="cafe_information_id")
     private CafeInformation cafeInformation;
 

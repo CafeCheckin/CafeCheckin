@@ -26,11 +26,11 @@ public class Comment extends BaseTimeEntity{ //댓글 구현
     @Lob
     private String commentText;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
     private Board board;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 

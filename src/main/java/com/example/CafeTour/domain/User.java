@@ -33,7 +33,7 @@ public class User{
     @CreationTimestamp
     private Timestamp userCreateDt;
 
-    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user")
     private List<Board> boardList;
 
 }
