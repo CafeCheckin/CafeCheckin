@@ -6,7 +6,6 @@ import com.example.CafeTour.domain.User;
 import com.example.CafeTour.domain.UserCreateForm;
 import com.example.CafeTour.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +27,7 @@ public class EmailChangeController {
     public void validatorBinder(WebDataBinder binder){
         binder.addValidators(checkEmailValidator);
     }
-
+/*
     @GetMapping("/user-email-update")
     public ModelAndView userEmailInfo(ModelAndView mav, Principal principal) {
         User userDto = userService.findByEmail(principal.getName());
@@ -41,7 +40,7 @@ public class EmailChangeController {
         mav.addObject("userId",userDto.getId());
         mav.setViewName("/users/user_email_update_form");
         return mav;
-    }
+    }*/
 
     @PostMapping("/user-email-update")
     public ModelAndView userEmailUpdate(@Valid UserCreateForm userCreateForm, Errors errors, Long userId, ModelAndView mav) {

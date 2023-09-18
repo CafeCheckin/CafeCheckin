@@ -1,13 +1,11 @@
 package com.example.CafeTour.controller;
 
 import com.example.CafeTour.Message;
-import com.example.CafeTour.auth.CheckEmailValidator;
 import com.example.CafeTour.auth.CheckNickNameValidator;
 import com.example.CafeTour.domain.User;
 import com.example.CafeTour.domain.UserCreateForm;
 import com.example.CafeTour.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +28,7 @@ public class NicknameChangeController {
         binder.addValidators(checkNickNameValidator);
     }
 
-    @GetMapping("/user-nickname-update")
+   /* @GetMapping("/user-nickname-update")
     public ModelAndView userNicknameInfo(ModelAndView mav, Principal principal) {
         User userDto = userService.findByEmail(principal.getName());
         UserCreateForm userCreateForm=new UserCreateForm(); //회원정보수정창에 넘겨줄 현재 로그인한 유저의 정보
@@ -43,7 +41,7 @@ public class NicknameChangeController {
         mav.setViewName("/users/user_nickname_update_form");
         return mav;
     }
-
+*/
     @PostMapping("/user-nickname-update")
     public ModelAndView userNicknameUpdate(@Valid UserCreateForm userCreateForm, Errors errors, Long userId,  ModelAndView mav) {
         if (errors.hasErrors()) {

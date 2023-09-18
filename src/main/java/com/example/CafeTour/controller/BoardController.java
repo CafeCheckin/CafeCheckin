@@ -1,20 +1,12 @@
 package com.example.CafeTour.controller;
 
-import com.example.CafeTour.Message;
 import com.example.CafeTour.domain.Board;
-import com.example.CafeTour.domain.User;
 import com.example.CafeTour.dto.BoardRequestDto;
 import com.example.CafeTour.dto.BoardResponseDto;
 import com.example.CafeTour.dto.BoardUpdateRequestDto;
-import com.example.CafeTour.dto.BoardWriteDto;
 import com.example.CafeTour.service.BoardService;
-import com.example.CafeTour.service.CommentService;
-import com.example.CafeTour.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.security.Principal;

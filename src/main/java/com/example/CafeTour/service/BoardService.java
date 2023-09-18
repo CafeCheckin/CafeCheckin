@@ -16,10 +16,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,8 +43,7 @@ public class BoardService {
 
     @Transactional(readOnly = true)
     public BoardResponseDto details(Long id){
-        Board board= boardRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("글 상세보기 실패"));
+        Board board= isError(id);
         List<Comment> comments = commentRepository.findByBoardIdOrderByCreateDateDesc(id);
         List<BoardResponseDto.CommentReponseDto> result = comments.stream()
                 .map(comment -> new BoardResponseDto.CommentReponseDto(comment))
@@ -60,12 +57,18 @@ public class BoardService {
 
     @Transactional
     public void updateBoard(BoardUpdateRequestDto requestDto, Long id) {
-        Board persistance=boardRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("글 찾기 실패"));
-        persistance.update(requestDto);
+        Board persistence=isError(id);
+        persistence.update(requestDto);
     } //게시글 수정
 
     @Transactional
     public void updateView(Long boardId) {
         boardRepository.updateView(boardId);
+    }
+
+    public Board isError(Long bookId){
+        Board board= boardRepository.findById(bookId)
+                .orElseThrow(()-> new IllegalArgumentException("글 찾기 실패"));
+        return board;
     }
 }

@@ -1,12 +1,13 @@
 package com.example.CafeTour.domain;
 
-import lombok.Data;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.validation.constraints.*;
+
 @Getter
 @Setter
+@Builder
 public class UserCreateForm {
     @NotBlank(message = "이메일은 필수항목입니다.")
     @Email
@@ -23,4 +24,14 @@ public class UserCreateForm {
 
     @NotBlank(message = "비밀번호 확인은 필수항목입니다.")
     private String password2;
+
+    @Builder
+    public UserCreateForm(String email, String username, String password1, String password2) {
+        this.email = email;
+        this.username = username;
+        this.password1 = password1;
+        this.password2 = password2;
+    }
+
+
 }

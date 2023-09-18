@@ -6,7 +6,6 @@ import com.example.CafeTour.domain.User;
 import com.example.CafeTour.domain.UserCreateForm;
 import com.example.CafeTour.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,20 +27,21 @@ public class PasswordChangeController {
     public void validatorBinder(WebDataBinder binder){
         binder.addValidators(checkPasswordValidator);
     }
-
+/*
     @GetMapping("/user-password-update")
     public ModelAndView userInfo(ModelAndView mav, Principal principal) {
         User userDto = userService.findByEmail(principal.getName());
-        UserCreateForm userCreateForm=new UserCreateForm(); //회원정보수정창에 넘겨줄 현재 로그인한 유저의 정보
+        UserCreateForm userCreateForm=UserCreateForm.builder()
+                .username(userDto.getNickName())
+                .email(userDto.getEmail())
+                .password1(userDto.getPw())
+                .password2(userDto.getPw())
+                .build(); //회원정보수정창에 넘겨줄 현재 로그인한 유저의 정보
         mav.addObject("dto",userCreateForm);
         mav.addObject("userId",userDto.getId());
-        userCreateForm.setUsername(userDto.getNickName());
-        userCreateForm.setEmail(userDto.getEmail());
-        userCreateForm.setPassword1(userDto.getPw());
-        userCreateForm.setPassword2(userDto.getPw());
         mav.setViewName("/users/user_password_update_form");
         return mav;
-    }
+    }*/
 
     @PostMapping("/user-password-update")
     public ModelAndView userInfoUpdate(@Valid UserCreateForm userCreateForm, Errors errors, Long userId, ModelAndView mav) {

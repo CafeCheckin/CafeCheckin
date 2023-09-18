@@ -10,10 +10,8 @@ import com.example.CafeTour.repository.BoardRepository;
 import com.example.CafeTour.repository.CommentRepository;
 import com.example.CafeTour.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.event.spi.PreInsertEvent;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Service
@@ -39,21 +37,24 @@ public class CommentService {
 
     @Transactional
     public CommentResponseDto detail(Long commentId) {
-        Comment comment=commentRepository.findById(commentId).orElseThrow(()
-                ->new IllegalArgumentException("존재하지 않는 댓글"));
+        Comment comment=isError(commentId);
         return new CommentResponseDto(comment);
     }
 
     @Transactional
     public void update(Long commentId, CommentUpdateRequestDto requestDto) {
-        Comment persistance=commentRepository.findById(commentId).orElseThrow(()
-                -> {
-            return new IllegalArgumentException("댓글 수정 실패");
-        });
-       persistance.update(requestDto);
+        Comment persistence=isError(commentId);
+       persistence.update(requestDto);
     }
 
+    @Transactional
     public void deleteById(Long commentId) {
         commentRepository.deleteById(commentId);
+    }
+
+    public Comment isError(Long commentId){
+        Comment persistence=commentRepository.findById(commentId).orElseThrow(()
+                ->new IllegalArgumentException("존재하지 않는 댓글"));
+        return persistence;
     }
 }

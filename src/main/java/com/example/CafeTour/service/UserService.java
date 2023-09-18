@@ -1,8 +1,10 @@
 package com.example.CafeTour.service;
 
 import com.example.CafeTour.domain.User;
+import com.example.CafeTour.domain.UserCreateForm;
 import com.example.CafeTour.domain.UserRole;
 import com.example.CafeTour.dto.MailDto;
+import com.example.CafeTour.dto.UserResponseDto;
 import com.example.CafeTour.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -51,13 +53,10 @@ public class UserService implements UserDetailsService{
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPw(), authorities);
     }
 
-    public User findByEmail(String email){
-        Optional<User> userOptional=userRepository.findByEmail(email);
-        if(userOptional.isPresent()){
-            User user=userOptional.get();
-            return user;
-        }
-        return null;
+    public UserResponseDto findByEmail(String email){
+        User user=userRepository.findByEmail(email).orElseThrow(()
+                ->new IllegalArgumentException("존재하지 않는 회원"));
+        return new UserResponseDto(user);
     }
 
     @Transactional

@@ -4,20 +4,16 @@ import com.example.CafeTour.Message;
 import com.example.CafeTour.auth.CheckEmailValidator;
 import com.example.CafeTour.auth.CheckNickNameValidator;
 import com.example.CafeTour.auth.CheckPasswordValidator;
-import com.example.CafeTour.domain.User;
 import com.example.CafeTour.domain.UserCreateForm;
-import com.example.CafeTour.dto.MailDto;
+import com.example.CafeTour.dto.UserResponseDto;
 import com.example.CafeTour.service.SendMailService;
 import com.example.CafeTour.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Map;
@@ -30,19 +26,12 @@ public class UserController {
     private final CheckNickNameValidator checkNickNameValidator;
     private final CheckPasswordValidator checkPasswordValidator;
     private final SendMailService sendMailService;
-    private final PasswordEncoder encoder;
+
     @InitBinder
     public void validatorBinder(WebDataBinder binder){
         binder.addValidators(checkEmailValidator);
         binder.addValidators(checkNickNameValidator);
         binder.addValidators(checkPasswordValidator);
-    }
-
-    @GetMapping("/signup")
-    public ModelAndView signup(ModelAndView mav) {
-        mav.addObject("dto",new UserCreateForm());
-        mav.setViewName("/users/signup_form");
-        return mav;
     }
 
     @PostMapping("/signup")
@@ -66,15 +55,8 @@ public class UserController {
     }
 
     @GetMapping("/user-info-update")
-    public ModelAndView userInfo(ModelAndView mav, Principal principal) {
-        User userDto = userService.findByEmail(principal.getName());
-        UserCreateForm userCreateForm=new UserCreateForm(); //회원정보수정창에 넘겨줄 현재 로그인한 유저의 정보
-        userCreateForm.setEmail(userDto.getEmail());
-        userCreateForm.setUsername(userDto.getNickName());
-        mav.addObject("dto",userCreateForm);
-        mav.addObject("userId",userDto.getId());
-        mav.setViewName("/users/user_update_form");
-        return mav;
+    public UserResponseDto userInfo(Principal principal) {
+        return  userService.findByEmail(principal.getName());
     }
     @PostMapping("/user-info-update")
     public ModelAndView userInfoUpdate(@Valid UserCreateForm userCreateForm, Errors errors, ModelAndView mav) {
@@ -94,19 +76,13 @@ public class UserController {
     }
 
     @GetMapping("/user-info")
-    public ModelAndView findByEmail(ModelAndView mav, Principal principal) {
-        User userDto = userService.findByEmail(principal.getName());
-        mav.addObject("userinfo2", userDto);
-        mav.setViewName("/users/user_info");
-        return mav;
+    public UserResponseDto findByEmail(Principal principal) {
+       return userService.findByEmail(principal.getName());
     }
 
-    @GetMapping("user-check")
-    public ModelAndView userCheck(ModelAndView mav, Principal principal) {
-        User userDto = userService.findByEmail(principal.getName());
-        mav.addObject("userinfo2", userDto);
-        mav.setViewName("/users/user_withdrawal");
-        return mav;
+    @GetMapping("/user-check")
+    public UserResponseDto userCheck(Principal principal) {
+       return userService.findByEmail(principal.getName());
     }
 
     @PostMapping("delete-user")
@@ -132,7 +108,7 @@ public class UserController {
         return mav;
     }
 
-    @PostMapping("password-find")
+   /* @PostMapping("password-find")
     public ModelAndView passwordFind(User user,ModelAndView mav) throws MessagingException {
         System.out.println("받아온 이메일"+user.getEmail());
 
@@ -149,6 +125,6 @@ public class UserController {
             return mav;
         }
         return mav;
-    }
+    }*/
 }
 

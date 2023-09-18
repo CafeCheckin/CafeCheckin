@@ -1,9 +1,5 @@
 package com.example.CafeTour.controller;
 
-import com.example.CafeTour.Message;
-import com.example.CafeTour.domain.CafeReview;
-import com.example.CafeTour.domain.User;
-import com.example.CafeTour.dto.CafeResponseDto;
 import com.example.CafeTour.dto.CafeReviewRequestDto;
 import com.example.CafeTour.dto.CafeReviewResponseDto;
 import com.example.CafeTour.dto.CafeReviewUpdateRequestDto;
@@ -11,17 +7,13 @@ import com.example.CafeTour.service.CafeReviewService;
 import com.example.CafeTour.service.CafeService;
 import com.example.CafeTour.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import java.security.Principal;
 
 @RestController
 @RequiredArgsConstructor
 public class CafeReviewController {
-    private final UserService userService;
     private final CafeReviewService cafeReviewService;
-    private final CafeService cafeService;
 
     @PostMapping("/write-review/{cafeId}") //작성한 리뷰 저장
     public Long reviewList(@PathVariable Long cafeId, @RequestBody CafeReviewRequestDto requestDto, Principal principal) {
