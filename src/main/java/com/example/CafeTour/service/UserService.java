@@ -1,7 +1,6 @@
 package com.example.CafeTour.service;
 
 import com.example.CafeTour.domain.User;
-import com.example.CafeTour.domain.UserCreateForm;
 import com.example.CafeTour.domain.UserRole;
 import com.example.CafeTour.dto.MailDto;
 import com.example.CafeTour.dto.UserResponseDto;
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
-
+import javax.mail.MessagingException;
 import java.security.Principal;
 import java.util.*;
 
@@ -54,50 +53,47 @@ public class UserService implements UserDetailsService{
     }
 
     public UserResponseDto findByEmail(String email){
-        User user=userRepository.findByEmail(email).orElseThrow(()
-                ->new IllegalArgumentException("존재하지 않는 회원"));
+        User user=isError(email);
         return new UserResponseDto(user);
+    }
+
+    public Long findPassword(String email) throws MessagingException {
+        User user=isError(email);
+            MailDto dto = sendMailService.createMailAndChangePassword(user.getEmail(), user.getNickName());
+            sendMailService.mailSend(dto);
+            return user.getId();
     }
 
     @Transactional
     public void updateEmail(String email,Long userId){
-        User persistance=userRepository.findById(userId).orElseThrow(()
-                ->{return new IllegalArgumentException("회원찾기 실패");
-        });
-        persistance.setEmail(email);
+        User persistence=isError(email);
+        persistence.setEmail(email);
     } //회원 정보 업데이트
 
     @Transactional
-    public void updateNickName(String username,Long userId){
-        User persistance=userRepository.findById(userId).orElseThrow(()
-                ->{return new IllegalArgumentException("회원찾기 실패");
-        });
+    public void updateNickName(String username,String email){
+        User persistance=isError(email);
         persistance.setNickName(username);
     } //회원 정보 업데이트
 
     @Transactional
-    public void updatePassword(String password,Long userId){
-        User persistance=userRepository.findById(userId).orElseThrow(()
-                ->{return new IllegalArgumentException("회원찾기 실패");
-        });
+    public void updatePassword(String password,String email){
+        User persistance=isError(email);
         String rawPassword=password;
         String encPassword=encoder.encode(rawPassword);
         persistance.setPw(encPassword);
     } //회원 정보 업데이트
 
     @Transactional
-    public boolean deleteUser(String password, Principal principal) {
-        User persistance = userRepository.findByEmail(principal.getName()).orElseThrow(()
-                -> {
-            return new IllegalArgumentException("회원찾기 실패");
-        });
+    public boolean deleteUser(String password, Principal principal) { //회원탈퇴
+        User persistence=isError(principal.getName());
 
-        if(encoder.matches(password,persistance.getPw())){
-            userRepository.deleteById(persistance.getId());
+        if(encoder.matches(password,persistence.getPw())){
+            userRepository.deleteById(persistence.getId());
             return true;
         }
         return false;
-    } //회원탈퇴
+    }
 
     public boolean doubleCheckEmail(String email) {
         return userRepository.existsByEmail(email);
@@ -115,5 +111,9 @@ public class UserService implements UserDetailsService{
         return validatorResult;
     }
 
-
+    public User isError(String email){
+        User persistence = userRepository.findByEmail(email).orElseThrow(()->
+                new IllegalArgumentException("존재하지 않는 회원"));
+        return persistence;
+    }
 }

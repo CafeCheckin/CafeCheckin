@@ -7,17 +7,18 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 public class UserWishResponseDto {
     private Long id;
     private User user;
-    private CafeInformation cafeInformation;
+    private List<CafeInformation> cafeInformation;
 
     @Builder
     public UserWishResponseDto(UserWish userWish) {
         this.id = user.getId();
         this.user=userWish.getUser();
-        this.cafeInformation=userWish.getCafeInformation();
+        this.cafeInformation= (List<CafeInformation>) userWish.getCafeInformation();
     }
 }

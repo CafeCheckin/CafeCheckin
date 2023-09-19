@@ -5,6 +5,7 @@ import com.example.CafeTour.auth.CheckEmailValidator;
 import com.example.CafeTour.auth.CheckNickNameValidator;
 import com.example.CafeTour.auth.CheckPasswordValidator;
 import com.example.CafeTour.domain.UserCreateForm;
+import com.example.CafeTour.dto.UserRequestDto;
 import com.example.CafeTour.dto.UserResponseDto;
 import com.example.CafeTour.service.SendMailService;
 import com.example.CafeTour.service.UserService;
@@ -14,6 +15,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Map;
@@ -25,7 +27,6 @@ public class UserController {
     private final CheckEmailValidator checkEmailValidator;
     private final CheckNickNameValidator checkNickNameValidator;
     private final CheckPasswordValidator checkPasswordValidator;
-    private final SendMailService sendMailService;
 
     @InitBinder
     public void validatorBinder(WebDataBinder binder){
@@ -85,46 +86,19 @@ public class UserController {
        return userService.findByEmail(principal.getName());
     }
 
-    @PostMapping("delete-user")
-    public ModelAndView deleteUser(@RequestParam String password, Principal principal, ModelAndView mav) {
-        boolean result = userService.deleteUser(password, principal);
-        if (result == true) {
-            mav.setViewName("redirect:/home");
-            return mav;
-        } else {
-            mav.setViewName("/user-check");
-            return mav;
-        }
+    @PostMapping("delete-user") //유저 탈퇴
+    public boolean deleteUser(@RequestBody UserRequestDto requestDto, Principal principal) {
+        return userService.deleteUser(requestDto.getPassword(), principal);
     }
 
-    @GetMapping("/email-check")
+    @GetMapping("/email-check") //이메일 중복 체크
     public ResponseEntity<Boolean> emailCheck(@RequestParam(name = "email")String email){
         return ResponseEntity.ok(userService.doubleCheckEmail(email));
     }
 
-    @GetMapping("/find-password")
-    public ModelAndView findPassword(ModelAndView mav){
-        mav.setViewName("/users/user_find_password");
-        return mav;
+    @PostMapping("/password-find") //임시 비밀번호 발급
+    public Long passwordFind(@RequestBody UserRequestDto requestDto) throws MessagingException {
+        return userService.findPassword(requestDto.getEmail());
     }
-
-   /* @PostMapping("password-find")
-    public ModelAndView passwordFind(User user,ModelAndView mav) throws MessagingException {
-        System.out.println("받아온 이메일"+user.getEmail());
-
-        if(userService.findByEmail(user.getEmail())!=null){
-            User userdto=userService.findByEmail(user.getEmail());
-            MailDto dto = sendMailService.createMailAndChangePassword(userdto.getEmail(), userdto.getNickName());
-            sendMailService.mailSend(dto);
-            mav.addObject("data", new Message("입력하신 이메일로 임시 비밀번호가 전송되었습니다", "/home"));
-            mav.setViewName("Message");
-        }
-        else{
-            mav.addObject("data", new Message("존재하지 않은 이메일입니다!", "/find-password"));
-            mav.setViewName("Message");
-            return mav;
-        }
-        return mav;
-    }*/
 }
 

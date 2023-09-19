@@ -4,6 +4,7 @@ import com.example.CafeTour.Message;
 import com.example.CafeTour.auth.CheckEmailValidator;
 import com.example.CafeTour.domain.User;
 import com.example.CafeTour.domain.UserCreateForm;
+import com.example.CafeTour.dto.UserResponseDto;
 import com.example.CafeTour.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.Errors;
@@ -27,20 +28,11 @@ public class EmailChangeController {
     public void validatorBinder(WebDataBinder binder){
         binder.addValidators(checkEmailValidator);
     }
-/*
-    @GetMapping("/user-email-update")
-    public ModelAndView userEmailInfo(ModelAndView mav, Principal principal) {
-        User userDto = userService.findByEmail(principal.getName());
-        UserCreateForm userCreateForm=new UserCreateForm(); //회원정보수정창에 넘겨줄 현재 로그인한 유저의 정보
-        userCreateForm.setEmail(userDto.getEmail());
-        userCreateForm.setUsername(userDto.getNickName());
-        userCreateForm.setPassword1(userDto.getPw());
-        userCreateForm.setPassword2(userDto.getPw());
-        mav.addObject("dto",userCreateForm);
-        mav.addObject("userId",userDto.getId());
-        mav.setViewName("/users/user_email_update_form");
-        return mav;
-    }*/
+
+    @GetMapping("/user-email-update") //로그인한 유저 이메일 불러오기
+    public UserResponseDto userEmailInfo(Principal principal) {
+        return userService.findByEmail(principal.getName());
+    }
 
     @PostMapping("/user-email-update")
     public ModelAndView userEmailUpdate(@Valid UserCreateForm userCreateForm, Errors errors, Long userId, ModelAndView mav) {

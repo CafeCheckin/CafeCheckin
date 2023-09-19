@@ -1,8 +1,6 @@
 package com.example.CafeTour.domain;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -12,6 +10,7 @@ import java.util.List;
 @Table(name = "user")
 @Getter
 @Setter
+@NoArgsConstructor
 public class User{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
@@ -36,4 +35,14 @@ public class User{
     @OneToMany(mappedBy = "user")
     private List<Board> boardList;
 
+    @Builder
+    public User(Long id, String pw, String email, String nickName, String userRole, Timestamp userCreateDt, List<Board> boardList) {
+        this.id = id;
+        this.Pw = pw;
+        this.email = email;
+        this.nickName = nickName;
+        this.userRole = userRole;
+        this.userCreateDt = userCreateDt;
+        this.boardList = boardList;
+    }
 }

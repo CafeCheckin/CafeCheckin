@@ -4,6 +4,7 @@ import com.example.CafeTour.Message;
 import com.example.CafeTour.auth.CheckNickNameValidator;
 import com.example.CafeTour.domain.User;
 import com.example.CafeTour.domain.UserCreateForm;
+import com.example.CafeTour.dto.UserResponseDto;
 import com.example.CafeTour.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.Errors;
@@ -28,22 +29,13 @@ public class NicknameChangeController {
         binder.addValidators(checkNickNameValidator);
     }
 
-   /* @GetMapping("/user-nickname-update")
-    public ModelAndView userNicknameInfo(ModelAndView mav, Principal principal) {
-        User userDto = userService.findByEmail(principal.getName());
-        UserCreateForm userCreateForm=new UserCreateForm(); //회원정보수정창에 넘겨줄 현재 로그인한 유저의 정보
-        userCreateForm.setUsername(userDto.getNickName());
-        userCreateForm.setEmail(userDto.getEmail());
-        userCreateForm.setPassword1(userDto.getPw());
-        userCreateForm.setPassword2(userDto.getPw());
-        mav.addObject("dto",userCreateForm);
-        mav.addObject("userId",userDto.getId());
-        mav.setViewName("/users/user_nickname_update_form");
-        return mav;
+    @GetMapping("/user-nickname-update") //로그인 유저 닉네임 정보 불러오기
+    public UserResponseDto userNicknameInfo(Principal principal) {
+        return userService.findByEmail(principal.getName());
     }
-*/
+
     @PostMapping("/user-nickname-update")
-    public ModelAndView userNicknameUpdate(@Valid UserCreateForm userCreateForm, Errors errors, Long userId,  ModelAndView mav) {
+    public ModelAndView userNicknameUpdate(@Valid UserCreateForm userCreateForm, Errors errors, Principal principal,  ModelAndView mav) {
         if (errors.hasErrors()) {
             mav.addObject("dto",userCreateForm);
 
@@ -56,7 +48,7 @@ public class NicknameChangeController {
             return mav;
         }
 
-        userService.updateNickName(userCreateForm.getUsername(),userId);
+        userService.updateNickName(userCreateForm.getUsername(),principal.getName());
         mav.addObject("data", new Message("닉네임 수정이 완료되었습니다.", "/user-info"));
         mav.setViewName("Message");
         return mav;

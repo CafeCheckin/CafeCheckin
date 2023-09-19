@@ -20,10 +20,10 @@ public class UserWishService {
     private final UserWishRepository userWishRepository;
     private final UserRepository userRepository;
     private final CafeRepository cafeRepository;
+    private final UserService userService;
     @Transactional
     public Long register(Long cafeId, String email, UserWishRequestDto requestDto) {
-        User user=userRepository.findByEmail(email).orElseThrow(()
-                ->new IllegalArgumentException("존재하지 않는 사용자"));
+        User user=userService.isError(email);
         CafeInformation cafeInformation=cafeRepository.findById(cafeId).orElseThrow(()
                 ->new IllegalArgumentException("존재하지 않는 카페"));
         return userWishRepository.save(requestDto.toEntity(user,cafeInformation)).getId();
@@ -31,9 +31,7 @@ public class UserWishService {
 
     @Transactional
     public void findWishList(String email,UserWishResponseDto responseDto){
-        User user=userRepository.findByEmail(email).orElseThrow(()
-                ->new IllegalArgumentException("존재하지 않는 사용자"));
-
+        User user=userService.isError(email);
     }
 
     @Transactional
