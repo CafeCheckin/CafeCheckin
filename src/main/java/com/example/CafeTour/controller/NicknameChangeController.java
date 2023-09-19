@@ -1,11 +1,10 @@
 package com.example.CafeTour.controller;
 
-import com.example.CafeTour.Message;
+import com.example.CafeTour.config.mail.Message;
 import com.example.CafeTour.auth.CheckNickNameValidator;
-import com.example.CafeTour.domain.User;
-import com.example.CafeTour.domain.UserCreateForm;
-import com.example.CafeTour.dto.UserResponseDto;
-import com.example.CafeTour.service.UserService;
+import com.example.CafeTour.user.UserCreateForm;
+import com.example.CafeTour.user.userdto.UserResponseDto;
+import com.example.CafeTour.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;

@@ -1,6 +1,6 @@
 package com.example.CafeTour.auth;
 
-import com.example.CafeTour.domain.User;
+import com.example.CafeTour.user.User;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

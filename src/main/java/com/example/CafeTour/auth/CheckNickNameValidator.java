@@ -1,7 +1,7 @@
 package com.example.CafeTour.auth;
 
-import com.example.CafeTour.domain.UserCreateForm;
-import com.example.CafeTour.repository.UserRepository;
+import com.example.CafeTour.user.UserCreateForm;
+import com.example.CafeTour.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
