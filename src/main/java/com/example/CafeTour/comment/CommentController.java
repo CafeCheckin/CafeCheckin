@@ -13,7 +13,7 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("/comment-write") //게시판 댓글 작성
-    public Long commentWrite(Long boardId, @RequestBody CommentRequestDto requestDto, Principal principal){
+    public Long commentWrite(@RequestBody Long boardId, CommentRequestDto requestDto, Principal principal){
         return commentService.write(boardId,requestDto,principal.getName());
     }
 
@@ -28,8 +28,8 @@ public class CommentController {
         return commentId;
     }
 
-    @DeleteMapping("/comment-delete") //댓글 삭제
-    public String commentDelete(Long commentId){
+    @DeleteMapping("/comment-delete/{commentId}") //댓글 삭제
+    public String commentDelete(@PathVariable Long commentId){
         commentService.deleteById(commentId);
         return "삭제 완료";
     }

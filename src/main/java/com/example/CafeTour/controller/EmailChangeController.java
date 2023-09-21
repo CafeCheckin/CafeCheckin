@@ -45,7 +45,7 @@ public class EmailChangeController {
             mav.setViewName("/user_email_update_form");
             return mav;
         }
-        userService.updateEmail(userCreateForm.getEmail(),userId);
+        //userService.updateEmail(userCreateForm.getEmail(),userId);
 
         mav.addObject("data", new Message("이메일 수정이 완료되었습니다.", "/user-info"));
         mav.setViewName("Message");

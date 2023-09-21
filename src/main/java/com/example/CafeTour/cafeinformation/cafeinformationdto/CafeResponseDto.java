@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-
 public class CafeResponseDto {
     private Long id;
     private String cafeName;

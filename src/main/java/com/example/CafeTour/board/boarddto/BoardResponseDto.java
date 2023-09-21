@@ -5,11 +5,13 @@ import com.example.CafeTour.comment.Comment;
 import com.example.CafeTour.user.User;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 @Getter
+@NoArgsConstructor
 public class BoardResponseDto {
     private Long id;
     private String userNickName;
@@ -29,6 +31,8 @@ public class BoardResponseDto {
         this.comments=comments;
     }
 
+    @Getter
+    @NoArgsConstructor
     public static class CommentReponseDto{
         private Long id;
         private String commentText;

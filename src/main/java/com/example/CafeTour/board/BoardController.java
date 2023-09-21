@@ -28,7 +28,7 @@ public class BoardController {
     }
 
     @GetMapping("/view/{boardId}") //게시글 상세조회
-    public BoardResponseDto findById(@PathVariable Long boardId,Principal principal){ //게시글의 번호(Id)값을 인자로 받음
+    public BoardResponseDto findById(@PathVariable Long boardId){ //게시글의 번호(Id)값을 인자로 받음
         return boardService.details(boardId);
     }
 

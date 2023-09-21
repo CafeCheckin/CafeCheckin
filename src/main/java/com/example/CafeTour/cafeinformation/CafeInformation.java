@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "cafe_information")
 @Getter
-@Setter
 public class CafeInformation {
         @javax.persistence.Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,4 +40,8 @@ public class CafeInformation {
 
         @Column(name = "cafe_grade", columnDefinition = "double default 0.0",nullable = false)
         private Double cafeGrade;
+
+        public void updateCafeGrade(double cafeGrade){
+                this.cafeGrade=cafeGrade;
+        }
 }

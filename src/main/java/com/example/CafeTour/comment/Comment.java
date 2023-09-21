@@ -4,6 +4,7 @@ import com.example.CafeTour.board.Board;
 import com.example.CafeTour.BaseTimeEntity;
 import com.example.CafeTour.comment.commentdto.CommentUpdateRequestDto;
 import com.example.CafeTour.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,6 @@ import javax.persistence.*;
 @Table(name = "comments")
 @EntityListeners(AuditingEntityListener.class)
 @Getter
-@Setter
 @NoArgsConstructor
 public class Comment extends BaseTimeEntity { //댓글 구현
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +28,7 @@ public class Comment extends BaseTimeEntity { //댓글 구현
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
+    @JsonIgnore
     private Board board;
 
     @ManyToOne(fetch = FetchType.LAZY)

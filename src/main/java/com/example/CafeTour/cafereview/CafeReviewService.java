@@ -1,13 +1,11 @@
 package com.example.CafeTour.cafereview;
 
 import com.example.CafeTour.cafeinformation.CafeInformation;
-import com.example.CafeTour.cafereview.CafeReview;
 import com.example.CafeTour.user.User;
 import com.example.CafeTour.cafereview.cafereviewdto.CafeReviewRequestDto;
 import com.example.CafeTour.cafereview.cafereviewdto.CafeReviewResponseDto;
 import com.example.CafeTour.cafereview.cafereviewdto.CafeReviewUpdateRequestDto;
 import com.example.CafeTour.cafeinformation.CafeRepository;
-import com.example.CafeTour.cafereview.CafeReviewRepository;
 import com.example.CafeTour.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

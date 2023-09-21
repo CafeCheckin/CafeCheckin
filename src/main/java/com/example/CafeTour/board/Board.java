@@ -12,7 +12,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "boarding")
+@Table(name = "boarding",indexes = @Index(name = "idx_board",columnList = "Id"))
 @Getter
 @NoArgsConstructor
 public class Board extends BaseTimeEntity {
@@ -25,7 +25,6 @@ public class Board extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "board") //mappedBy는 연관관계의주인X, FK가 아니니 컬럼생성X
     private List<Comment> reply;
 

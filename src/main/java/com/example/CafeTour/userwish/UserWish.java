@@ -12,7 +12,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user_wish")
 @Getter
-@Setter
 @NoArgsConstructor
 public class UserWish {
         @Id

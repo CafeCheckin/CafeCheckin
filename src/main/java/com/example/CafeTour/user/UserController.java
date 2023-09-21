@@ -56,6 +56,7 @@ public class UserController {
     public UserResponseDto userInfo(Principal principal) {
         return  userService.findByEmail(principal.getName());
     }
+
     @PostMapping("/user-info-update")
     public ModelAndView userInfoUpdate(@Valid UserCreateForm userCreateForm, Errors errors, ModelAndView mav) {
         if (errors.hasErrors()) {

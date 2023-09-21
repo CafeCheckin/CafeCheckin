@@ -47,7 +47,7 @@ public class NicknameChangeController {
             return mav;
         }
 
-        userService.updateNickName(userCreateForm.getUsername(),principal.getName());
+      //  userService.updateNickName(userCreateForm.getUsername(),principal.getName());
         mav.addObject("data", new Message("닉네임 수정이 완료되었습니다.", "/user-info"));
         mav.setViewName("Message");
         return mav;

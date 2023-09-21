@@ -26,7 +26,7 @@ public class CafeService {
         System.out.println("카페이름: " + cafeInformation.get().getCafeName());
         double gradeSum = cafeReviewRepository.showGrade(cafeId); //현재 카페 총 리뷰 점수 12
         gradeSum /= size;
-        cafeInformation.get().setCafeGrade(gradeSum);
+        cafeInformation.get().updateCafeGrade(gradeSum);
         cafeRepository.save(cafeInformation.get());
     }
 }

@@ -13,7 +13,6 @@ import javax.persistence.*;
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "cafe_review")
 @Getter
-@Setter
 @NoArgsConstructor
 public class CafeReview extends BaseTimeEntity {
     @Id

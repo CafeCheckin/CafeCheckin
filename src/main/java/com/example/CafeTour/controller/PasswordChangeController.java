@@ -45,7 +45,7 @@ public class PasswordChangeController {
             mav.setViewName("/users/user_password_update_form");
             return mav;
         }
-        userService.updatePassword(userCreateForm.getPassword1(),principal.getName());
+        //userService.updatePassword(userCreateForm.getPassword1(),principal.getName());
 
         mav.addObject("data", new Message("비밀번호 수정이 완료되었습니다.", "/user-info"));
         mav.setViewName("Message");
