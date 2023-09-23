@@ -1,6 +1,7 @@
 package com.example.CafeTour.cafeimage;
 
 import com.example.CafeTour.cafeinformation.CafeInformation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +19,7 @@ public class CafeImage {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="cafe_id")
+    @JsonIgnore
     private CafeInformation cafeInformation;
 
     @Column(name = "cafe_image_url")

@@ -13,6 +13,7 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
+    private final BoardRepository boardRepository;
 
     @PostMapping("/write-board") //작성한 게시글 저장
     public Long boardList(@RequestBody BoardRequestDto requestDto,Principal principal) {
@@ -34,7 +35,7 @@ public class BoardController {
 
     @DeleteMapping("/board/{boardId}") //게시글 삭제
     public String deleteBoarding(@PathVariable Long boardId){
-        boardService.deleteById(boardId);
+        boardRepository.deleteById(boardId);
         return "삭제 완료";
     }
 

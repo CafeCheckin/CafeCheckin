@@ -10,20 +10,19 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class CafeService {
     private final CafeRepository cafeRepository;
     private final CafeReviewRepository cafeReviewRepository;
 
-    @Transactional(readOnly = true)
     public CafeResponseDto details(Long id) {
        CafeInformation cafeInformation=cafeRepository.findById(id).orElseThrow(()->new IllegalArgumentException("존재하지 않은 카페"));
        return new CafeResponseDto(cafeInformation);
     } //카페 세부사항 조회
 
     @Transactional
-    public void updateGrade(int grade, Long cafeId, int size) {
+    public void updateGrade(int grade, Long cafeId, int size) { //카페 평점 등록
         Optional<CafeInformation> cafeInformation = cafeRepository.findById(cafeId);
-        System.out.println("카페이름: " + cafeInformation.get().getCafeName());
         double gradeSum = cafeReviewRepository.showGrade(cafeId); //현재 카페 총 리뷰 점수 12
         gradeSum /= size;
         cafeInformation.get().updateCafeGrade(gradeSum);

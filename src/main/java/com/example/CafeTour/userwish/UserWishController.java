@@ -13,6 +13,7 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class UserWishController {
     private final UserWishService userWishService;
+    private final UserWishRepository userWishRepository;
 
     @GetMapping("/wish-cafe") //카페 찜하기
     public Long wishCafe(Long cafeId, Principal principal, @RequestBody UserWishRequestDto requestDto) {
@@ -26,7 +27,7 @@ public class UserWishController {
 
     @GetMapping("delete-wishlist") //사용자 위시리스트 삭제
     public String deleteWishList(Long wishListId) {
-        userWishService.delete(wishListId);
+        userWishRepository.deleteById(wishListId);
         return "삭제 완료";
     }
 }

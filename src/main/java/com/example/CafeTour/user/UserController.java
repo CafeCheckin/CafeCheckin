@@ -32,8 +32,8 @@ public class UserController {
         binder.addValidators(checkPasswordValidator);
     }
 
-    @PostMapping("/signup")
-    public ModelAndView signup(@Valid UserCreateForm userCreateForm, Errors errors, ModelAndView mav) {
+        @PostMapping("/signup")
+    public ModelAndView signup(@Valid @RequestBody UserCreateForm userCreateForm, Errors errors, ModelAndView mav) {
         if (errors.hasErrors()) {
             mav.addObject("dto",userCreateForm);
 

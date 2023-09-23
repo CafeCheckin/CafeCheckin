@@ -11,6 +11,7 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class CommentController {
     private final CommentService commentService;
+    private final CommentRepository commentRepository;
 
     @PostMapping("/comment-write") //게시판 댓글 작성
     public Long commentWrite(@RequestBody Long boardId, CommentRequestDto requestDto, Principal principal){
@@ -30,7 +31,7 @@ public class CommentController {
 
     @DeleteMapping("/comment-delete/{commentId}") //댓글 삭제
     public String commentDelete(@PathVariable Long commentId){
-        commentService.deleteById(commentId);
+        commentRepository.deleteById(commentId);
         return "삭제 완료";
     }
 }

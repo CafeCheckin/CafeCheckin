@@ -7,6 +7,7 @@ import com.example.CafeTour.board.boarddto.BoardResponseDto;
 import com.example.CafeTour.board.boarddto.BoardUpdateRequestDto;
 import com.example.CafeTour.comment.CommentRepository;
 import com.example.CafeTour.user.UserRepository;
+import com.example.CafeTour.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,18 +21,19 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class BoardService {
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
+    private final UserService userService;
 
     @Transactional
     public Long write(BoardRequestDto requestDto,String userEmail){
-        User user=userRepository.findByEmail(userEmail).orElseThrow(()->new IllegalArgumentException("존재하지 않는 사용자"));
+        User user=userService.isError(userEmail);
         return boardRepository.save(requestDto.toEntity(user)).getId();
     } //게시판 글 작성
 
-    @Transactional(readOnly = true)
     public Page<Board> boardingList(int page){
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
@@ -39,7 +41,6 @@ public class BoardService {
         return this.boardRepository.findAll(pageable);
     } //게시판 목록 출력
 
-    @Transactional(readOnly = true)
     public BoardResponseDto details(Long id){
         Board board= isError(id);
         List<Comment> comments = commentRepository.findByBoardIdOrderByCreateDateDesc(id);
@@ -49,10 +50,6 @@ public class BoardService {
         return new BoardResponseDto(board, result);
     } //게시판 세부사항 조회
 
-    public void deleteById(Long id) {
-        boardRepository.deleteById(id);
-    } //게시글 삭제
-
     @Transactional
     public void updateBoard(BoardUpdateRequestDto requestDto, Long id) {
         Board persistence=isError(id);
@@ -60,7 +57,7 @@ public class BoardService {
     } //게시글 수정
 
     @Transactional
-    public void updateView(Long boardId) {
+    public void updateView(Long boardId) { //조회수 증가
         boardRepository.updateView(boardId);
     }
 

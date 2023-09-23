@@ -5,6 +5,7 @@ import com.example.CafeTour.comment.Comment;
 import com.example.CafeTour.board.boarddto.BoardUpdateRequestDto;
 import com.example.CafeTour.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,17 +16,20 @@ import java.util.List;
 @Table(name = "boarding",indexes = @Index(name = "idx_board",columnList = "Id"))
 @Getter
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Board extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Long id;
 
-    @JsonIgnore
+
     @JoinColumn(name ="user_id")
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "board") //mappedBy는 연관관계의주인X, FK가 아니니 컬럼생성X
+    @JsonIgnore
     private List<Comment> reply;
 
     @Lob

@@ -1,6 +1,7 @@
 package com.example.CafeTour.user;
 
 import com.example.CafeTour.board.Board;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.List;
 @Table(name = "user")
 @Getter
 @Setter
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @NoArgsConstructor
 public class User{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

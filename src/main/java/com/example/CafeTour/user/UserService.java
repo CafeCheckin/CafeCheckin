@@ -38,11 +38,7 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> _user = this.userRepository.findByEmail(username);
-        if (_user.isEmpty()) {
-            throw new UsernameNotFoundException("사용자를 찾을수 없습니다.");
-        }
-        User user = _user.get();
+        User user=isError(username);
         List<GrantedAuthority> authorities = new ArrayList<>();
         if ("admin".equals(username)) {
             authorities.add(new SimpleGrantedAuthority(UserRole.ADMIN.getValue()));
@@ -64,27 +60,6 @@ public class UserService implements UserDetailsService {
         return user.getId();
     }
 
-    @Transactional
-    public void updateEmail(String email, Long userId) {
-        User persistence = isError(email);
-        persistence.setEmail(email);
-    } //회원 정보 업데이트
-
-    @Transactional
-    public void updateNickName(String username, String email) {
-        User persistance = isError(email);
-        persistance.setNickName(username);
-    } //회원 정보 업데이트
-
-    @Transactional
-    public void updatePassword(String password, String email) {
-        User persistance = isError(email);
-        String rawPassword = password;
-        String encPassword = encoder.encode(rawPassword);
-        persistance.setPw(encPassword);
-    } //회원 정보 업데이트
-
-    @Transactional
     public boolean deleteUser(String password, Principal principal) { //회원탈퇴
         User persistence = isError(principal.getName());
 
@@ -99,7 +74,6 @@ public class UserService implements UserDetailsService {
         return userRepository.existsByEmail(email);
     }
 
-    @Transactional
     public Map<String, String> validateHandling(Errors errors) {
         Map<String, String> validatorResult = new HashMap<>();
 

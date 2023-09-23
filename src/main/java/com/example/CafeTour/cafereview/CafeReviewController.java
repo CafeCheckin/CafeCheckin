@@ -11,6 +11,7 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class CafeReviewController {
     private final CafeReviewService cafeReviewService;
+    private final CafeReviewRepository cafeReviewRepository;
 
     @PostMapping("/write-review/{cafeId}") //작성한 리뷰 저장
     public Long reviewList(@PathVariable Long cafeId, @RequestBody CafeReviewRequestDto requestDto, Principal principal) {
@@ -18,8 +19,8 @@ public class CafeReviewController {
     }
 
     @DeleteMapping("/delete-review/{reviewId}") //리뷰 삭제
-    public String deleteReview(@PathVariable Long reviewId, Long cafeId) { //리뷰의 Id
-        cafeReviewService.deleteById(reviewId);
+    public String deleteReview(@PathVariable Long reviewId) { //리뷰의 Id
+        cafeReviewRepository.deleteById(reviewId);
         return "삭제 완료";
     }
 

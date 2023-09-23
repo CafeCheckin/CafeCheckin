@@ -2,10 +2,10 @@ package com.example.CafeTour.userwish;
 
 import com.example.CafeTour.cafeinformation.CafeInformation;
 import com.example.CafeTour.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -21,10 +21,12 @@ public class UserWish {
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name ="user_id")
+        @JsonIgnore
         private User user;
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name ="cafe_id")
+        @JsonIgnore
         private CafeInformation cafeInformation;
 
         @Builder
