@@ -45,10 +45,11 @@ public class BoardService {
         Board board= isError(id);
         List<Comment> comments = commentRepository.findByBoardIdOrderByCreateDateDesc(id);
         List<BoardResponseDto.CommentReponseDto> result = comments.stream()
-                .map(comment -> new BoardResponseDto.CommentReponseDto(comment))
+                .map(BoardResponseDto.CommentReponseDto::new)
                 .collect(Collectors.toList());
         return new BoardResponseDto(board, result);
     } //게시판 세부사항 조회
+
 
     @Transactional
     public void updateBoard(BoardUpdateRequestDto requestDto, Long id) {
