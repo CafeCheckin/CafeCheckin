@@ -1,5 +1,6 @@
 package com.example.CafeTour.service;
 
+import com.example.CafeTour.config.mail.SendMailService;
 import com.example.CafeTour.domain.User;
 import com.example.CafeTour.domain.UserRole;
 import com.example.CafeTour.dto.MailDto;
