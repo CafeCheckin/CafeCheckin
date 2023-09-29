@@ -3,6 +3,7 @@ package com.example.CafeTour.userwish;
 import com.example.CafeTour.cafeinformation.CafeInformation;
 import com.example.CafeTour.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user_wish")
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserWish {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
