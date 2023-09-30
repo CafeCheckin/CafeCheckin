@@ -5,6 +5,7 @@ import com.example.CafeTour.BaseTimeEntity;
 import com.example.CafeTour.comment.commentdto.CommentUpdateRequestDto;
 import com.example.CafeTour.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import javax.persistence.*;
 @Table(name = "comments")
 @EntityListeners(AuditingEntityListener.class)
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment extends BaseTimeEntity { //댓글 구현
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")

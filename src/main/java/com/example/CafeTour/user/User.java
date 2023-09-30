@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
