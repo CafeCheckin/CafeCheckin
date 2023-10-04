@@ -3,6 +3,7 @@ package com.example.CafeTour.user;
 import com.example.CafeTour.board.Board;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -36,6 +37,7 @@ public class User{
     private Timestamp userCreateDt;
 
     @OneToMany(mappedBy = "user")
+    @BatchSize(size = 100)
     private List<Board> boardList;
 
     @Builder

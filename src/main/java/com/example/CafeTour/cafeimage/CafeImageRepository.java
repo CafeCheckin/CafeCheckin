@@ -1,6 +1,5 @@
 package com.example.CafeTour.cafeimage;
 
-import com.example.CafeTour.cafeimage.CafeImage;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

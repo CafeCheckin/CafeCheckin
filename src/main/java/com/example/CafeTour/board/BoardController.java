@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,6 +27,12 @@ public class BoardController {
         mav.addObject("paging",paging);
         mav.setViewName("/boards/board_list");
         return mav;
+    }
+
+
+    @GetMapping("/board1")  //게시글 목록
+    public List<BoardResponseDto> list1() {
+        return boardService.findAll();
     }
 
     @GetMapping("/view/{boardId}") //게시글 상세조회

@@ -8,6 +8,7 @@ import com.example.CafeTour.board.boarddto.BoardUpdateRequestDto;
 import com.example.CafeTour.comment.CommentRepository;
 import com.example.CafeTour.user.UserRepository;
 import com.example.CafeTour.user.UserService;
+import com.example.CafeTour.user.userdto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 public class BoardService {
     private final BoardRepository boardRepository;
+    private final BoardJpaRepository boardJpaRepository;
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
     private final UserService userService;
@@ -66,5 +68,12 @@ public class BoardService {
         Board board= boardRepository.findById(bookId)
                 .orElseThrow(()-> new IllegalArgumentException("글 찾기 실패"));
         return board;
+    }
+
+    public List<BoardResponseDto> findAll() { //조회시 성능 최적화
+        List<BoardResponseDto> collect = boardJpaRepository.findAll().stream()
+                .map(BoardResponseDto::new)
+                .collect(Collectors.toList());
+        return collect;
     }
 }

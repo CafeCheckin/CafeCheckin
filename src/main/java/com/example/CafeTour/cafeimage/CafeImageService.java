@@ -1,8 +1,6 @@
 package com.example.CafeTour.cafeimage;
 
-import com.example.CafeTour.cafeimage.CafeImage;
 import com.example.CafeTour.cafeinformation.CafeInformation;
-import com.example.CafeTour.cafeimage.CafeImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
