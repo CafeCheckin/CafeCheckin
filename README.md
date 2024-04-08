@@ -17,7 +17,6 @@
 - BACKEND : Spring Framework, Java11, Mysql, Spring Data Jpa, SMTP
 - 버전 및 이슈관리 : Github
 - 서비스 배포 환경 : Spring Boot Apache Tomcat<br>
-</div>
 
 ## 프로젝트 소개
 CafCheckin은 서울에 존재하는 카페 중 사용자가 원하는 분위기의 카페를 보다 편하게 찾을 수 있게끔 도와주는 사이트입니다.
