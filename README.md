@@ -1,4 +1,19 @@
-# CafeCheckin
+# 간편한 서울 카페 조회 서비스 카페 체크인 README
+
+## 팀원 구성
+<div align="center">
+
+| **이준석** |
+| :------: || [<img src="https://avatars.githubusercontent.com/u/106502312?v=4" height=150 width=150> <br/> @yeon1615](https://github.com/yeon1615) |
+
+</div>
+
+<br>
+
+
+
+
+
 ## 프로젝트 소개
 CafCheckin은 서울에 존재하는 카페 중 사용자가 원하는 분위기의 카페를 보다 편하게 찾을 수 있게끔 도와주는 사이트입니다.
 또한 카페에 대한 정보, 리뷰등도 함께 제공합니다.
