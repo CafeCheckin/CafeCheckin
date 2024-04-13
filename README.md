@@ -40,7 +40,7 @@
 ## 화면 구성 📺
 |  홈페이지  |  메인 페이지   |
 | :-------------------------------------------: | :------------: |
-|  <img width="500" src="https://private-user-images.githubusercontent.com/56196986/322185970-58717cad-82cc-489c-8b25-063fe2358f5d.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTI5OTM5MjksIm5iZiI6MTcxMjk5MzYyOSwicGF0aCI6Ii81NjE5Njk4Ni8zMjIxODU5NzAtNTg3MTdjYWQtODJjYy00ODljLThiMjUtMDYzZmUyMzU4ZjVkLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA0MTMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwNDEzVDA3MzM0OVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTJhYWZiZTdmMDRjYTU1NjhlYTQ3ZjJiN2YwZTdhMzA3Yjg3Mzc4MmQzYWU4ZGZkMmYwMDkxMzI3NzMxZDMyZjMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.StIJwKD-qkHa0cYYahuvne_JxmW9z3F-ZfYTnrX8uzU"/> |  <img width="500" src="https://github.com/CafeCheckin/CafeCheckin/assets/56196986/10ebee86-ecd9-4dae-88d2-05eaebba2bea">|  
+|  <img width="500" src="https://github.com/CafeCheckin/CafeCheckin/assets/56196986/a55006f1-d3e8-4d27-9d0d-31718141dbb8"/> |  <img width="500" src="https://github.com/CafeCheckin/CafeCheckin/assets/56196986/10ebee86-ecd9-4dae-88d2-05eaebba2bea">|  
 | 게시글 목록 페이지   |  게사판 댓글 작성 페이지   |  
 | <img width="500" src="https://github.com/CafeCheckin/CafeCheckin/assets/56196986/93514b68-1ec9-4ef9-80f2-78e9e22ef1a0"/>   |  <img width="500" src="https://github.com/CafeCheckin/CafeCheckin/assets/56196986/9e4bce96-a695-4cc7-9ccc-708a860b3bec"/>     |
 | 댓글 상세보기 페이지   |  카페 상세 정보 페이지   |  
