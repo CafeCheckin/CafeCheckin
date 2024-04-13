@@ -44,16 +44,21 @@
 | 게시글 목록 페이지   |  게사판 댓글 작성 페이지   |  
 | <img width="500" src="https://github.com/CafeCheckin/CafeCheckin/assets/56196986/93514b68-1ec9-4ef9-80f2-78e9e22ef1a0"/>   |  <img width="500" src="https://github.com/CafeCheckin/CafeCheckin/assets/56196986/9e4bce96-a695-4cc7-9ccc-708a860b3bec"/>     |
 | 댓글 상세보기 페이지   |  카페 상세 정보 페이지   |  
-| <img width="500" src="https://github.com/CafeCheckin/CafeCheckin/assets/56196986/93514b68-1ec9-4ef9-80f2-78e9e22ef1a0"/>   |  <img width="500" src="https://github.com/CafeCheckin/CafeCheckin/assets/56196986/94710406-e69f-4c5e-88bc-ddc161c0ccda"/>     |
+| <img width="500" src="https://github.com/CafeCheckin/CafeCheckin/assets/56196986/33f1fec1-d92a-4176-bfe0-214835b7da47"/>   |  <img width="500" src="https://github.com/CafeCheckin/CafeCheckin/assets/56196986/94710406-e69f-4c5e-88bc-ddc161c0ccda"/>     |
 
 ---
 
-
-
 ## DB구조도
-![image](https://github.com/CafeCheckin/CafeCheckin/assets/56196986/b6c585b3-f1c0-48db-aeb0-ca1fc8ce7cdb)
+![image](https://github.com/CafeCheckin/CafeCheckin/assets/56196986/688eb59c-713d-4443-8d08-d1aea8bcbc78)
 
-### 기능정리
+---
+
+## System Architecture
+![image](https://github.com/CafeCheckin/CafeCheckin/assets/56196986/9bca1262-770e-4f70-ac78-47b53a27997b)
+
+---
+
+## 기능정리
 1. 유저 등록, 조회 수정, 삭제(탈퇴)
 2. 카페 리뷰 등록, 조회, 수정, 삭제, 좋아요표시
 3. 게시글 등록, 조회, 수정, 삭제, 좋아요 표시
