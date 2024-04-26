@@ -54,7 +54,8 @@
 ---
 
 ## System Architecture
-![image](https://github.com/CafeCheckin/CafeCheckin/assets/56196986/9bca1262-770e-4f70-ac78-47b53a27997b)
+<img width="639" alt="image" src="https://github.com/CafeCheckin/CafeCheckin/assets/56196986/c4033998-9137-4de9-afde-1d202baf860d">
+
 
 ---
 
